@@ -55,9 +55,19 @@
 
         /* --- PLAYER SECURITY BARRIER --- */
         /* This ensures users cannot click the YouTube iframe directly */
-        /* Disables 'Watch on YouTube', 'Share', and Context Menu */
         .plyr__video-embed iframe {
             pointer-events: none;
+        }
+
+        /* Rating Star Animation */
+        .star-btn:hover svg,
+        .star-btn.active svg {
+            fill: #f59e0b; /* Amber-500 */
+            stroke: #f59e0b;
+            transform: scale(1.2);
+        }
+        .star-btn svg {
+            transition: all 0.2s ease;
         }
     </style>
     <script>
@@ -102,16 +112,12 @@
         <div class="blob bg-brand-300 w-96 h-96 rounded-full top-0 left-0 -translate-x-1/2 -translate-y-1/2 mix-blend-multiply"></div>
         <div class="blob bg-purple-300 w-96 h-96 rounded-full bottom-0 right-0 translate-x-1/3 translate-y-1/3 mix-blend-multiply"></div>
 
-        <!-- Announcement Banner (Image Based) -->
-        <!-- EDIT HERE: Change the src attribute to your uploaded image URL -->
+        <!-- Announcement Banner -->
         <div id="announcement-bar" class="relative z-[60] bg-brand-900">
             <a href="#courses" class="block w-full">
-                <!-- Desktop Banner -->
                 <img src="https://placehold.co/1920x80/1e3a8a/ffffff?text=BIG+SALE:+Get+50%25+OFF+on+Grade+10+Courses!+Click+Here+to+Buy+Now" 
                      alt="Announcement Banner" 
                      class="hidden md:block w-full h-auto object-cover max-h-24" />
-                
-                <!-- Mobile Banner (Optional: Use a different image for mobile if needed) -->
                 <img src="https://placehold.co/800x100/1e3a8a/ffffff?text=50%25+OFF+Sale+-+Click+Here" 
                      alt="Announcement Banner Mobile" 
                      class="md:hidden w-full h-auto object-cover max-h-16" />
@@ -124,7 +130,6 @@
             <!-- Sticky Glassmorphism Navbar -->
             <header class="sticky top-0 z-50 backdrop-blur-md bg-white/80 border-b border-slate-200/60 shadow-sm transition-all duration-300" id="navbar">
                 <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-                    <!-- Logo -->
                     <a href="#" class="flex items-center gap-2 group">
                         <div class="w-8 h-8 bg-gradient-to-br from-brand-600 to-brand-800 rounded-lg flex items-center justify-center text-white shadow-lg group-hover:shadow-brand-500/50 transition-all">
                             <span class="font-bold text-lg">V</span>
@@ -132,7 +137,6 @@
                         <span class="text-2xl font-extrabold tracking-tight text-slate-900">Vidyantrix</span>
                     </a>
 
-                    <!-- Desktop Nav Links -->
                     <div class="hidden md:flex items-center space-x-8">
                         <a href="#hero" class="text-sm font-medium text-slate-600 hover:text-brand-600 transition-colors">Home</a>
                         <a href="#courses" class="text-sm font-medium text-slate-600 hover:text-brand-600 transition-colors">Courses</a>
@@ -144,13 +148,11 @@
                         </a>
                     </div>
 
-                    <!-- Mobile Menu Button -->
                     <button id="mobile-menu-btn" class="md:hidden text-slate-700 hover:text-brand-600 transition-colors" aria-label="Open menu">
                         <i data-lucide="menu" class="w-6 h-6"></i>
                     </button>
                 </nav>
 
-                <!-- Mobile Menu -->
                 <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-slate-100 absolute w-full shadow-xl">
                     <div class="px-6 py-4 space-y-3">
                         <a href="#hero" class="block text-slate-600 hover:text-brand-600 font-medium">Home</a>
@@ -163,7 +165,7 @@
                 </div>
             </header>
 
-            <!-- Premium Hero Section -->
+            <!-- Hero Section -->
             <section id="hero" class="relative pt-16 pb-24 lg:pt-24 lg:pb-32 overflow-hidden">
                 <div class="container mx-auto px-6">
                     <div class="flex flex-col lg:flex-row items-center gap-12">
@@ -205,13 +207,11 @@
                             </div>
                         </div>
 
-                        <!-- Visual Content (CSS Composition) -->
+                        <!-- Visual Content -->
                         <div class="lg:w-1/2 relative z-10">
                             <div class="relative w-full max-w-lg mx-auto aspect-square">
-                                <!-- Abstract decorative circles -->
                                 <div class="absolute inset-0 bg-gradient-to-tr from-brand-100 to-white rounded-full opacity-50 blur-3xl"></div>
                                 
-                                <!-- Main Card Stack Visual -->
                                 <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3/4 h-3/4 bg-white rounded-3xl shadow-2xl border border-slate-100 flex flex-col overflow-hidden transform rotate-3 hover:rotate-0 transition-transform duration-500">
                                     <div class="bg-slate-100 h-32 w-full flex items-center justify-center">
                                         <i data-lucide="graduation-cap" class="w-16 h-16 text-brand-200"></i>
@@ -228,7 +228,6 @@
                                     </div>
                                 </div>
 
-                                <!-- Floating Elements -->
                                 <div class="absolute top-10 right-0 bg-white p-4 rounded-2xl shadow-lg border border-slate-100 animate-[bounce_3s_infinite]">
                                     <div class="flex items-center gap-3">
                                         <div class="bg-green-100 p-2 rounded-full text-green-600">
@@ -258,28 +257,6 @@
                 </div>
             </section>
 
-            <!-- Stats Section -->
-            <section class="py-10 bg-white border-y border-slate-100">
-                <div class="container mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-                    <div class="p-4">
-                        <div class="text-3xl font-bold text-brand-600 mb-1">500+</div>
-                        <div class="text-sm text-slate-500 font-medium">Video Lessons</div>
-                    </div>
-                    <div class="p-4">
-                        <div class="text-3xl font-bold text-brand-600 mb-1">50+</div>
-                        <div class="text-sm text-slate-500 font-medium">Expert Teachers</div>
-                    </div>
-                    <div class="p-4">
-                        <div class="text-3xl font-bold text-brand-600 mb-1">10k+</div>
-                        <div class="text-sm text-slate-500 font-medium">Active Students</div>
-                    </div>
-                    <div class="p-4">
-                        <div class="text-3xl font-bold text-brand-600 mb-1">4.9</div>
-                        <div class="text-sm text-slate-500 font-medium">Average Rating</div>
-                    </div>
-                </div>
-            </section>
-
             <!-- Course Marketplace Section -->
             <section id="courses" class="py-24 relative">
                 <div class="container mx-auto px-6">
@@ -288,8 +265,6 @@
                             <h2 class="text-3xl md:text-4xl font-bold text-slate-900">Featured Courses</h2>
                             <p class="mt-2 text-lg text-slate-500">Handpicked curriculum for academic excellence.</p>
                         </div>
-                        
-                        <!-- Grade Filters -->
                         <div class="flex flex-wrap gap-2">
                             <button class="grade-filter-btn px-4 py-2 rounded-full text-sm font-semibold transition-all bg-brand-600 text-white shadow-lg shadow-brand-500/30" data-grade="all">All</button>
                             <button class="grade-filter-btn px-4 py-2 rounded-full text-sm font-semibold transition-all bg-white text-slate-600 hover:bg-slate-100 border border-slate-200" data-grade="10">Grade 10</button>
@@ -298,285 +273,55 @@
                         </div>
                     </div>
 
-                    <!-- Course Grid -->
                     <div id="course-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                        
-                        <!-- Card Template -->
+                        <!-- Course Card Logic Here (Same as before) -->
                         <div class="course-card group bg-white rounded-2xl shadow-card hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 border border-slate-100 overflow-hidden flex flex-col"
                              data-grade="10" data-title="Grade 10 - Mathematics Mastery" data-description="Full syllabus for Grade 10 Math, covering Algebra, Geometry, Trigonometry, and Statistics with real-world examples." data-price="4999" data-subjects="Mathematics" data-videos="60">
                             <div class="relative h-48 overflow-hidden">
                                 <img src="https://placehold.co/600x400/1e40af/white?text=Grade+10+Math" alt="Course" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
-                                <div class="absolute top-3 right-3 bg-white/90 backdrop-blur-sm px-2 py-1 rounded-md text-xs font-bold text-brand-700 shadow-sm">
-                                    Best Seller
-                                </div>
+                                <div class="absolute top-3 right-3 bg-white/90 backdrop-blur-sm px-2 py-1 rounded-md text-xs font-bold text-brand-700 shadow-sm">Best Seller</div>
                             </div>
                             <div class="p-6 flex flex-col flex-grow">
-                                <div class="flex items-center justify-between mb-3">
-                                    <span class="text-xs font-bold text-brand-600 bg-brand-50 px-2 py-1 rounded uppercase tracking-wider">Grade 10</span>
-                                    <div class="flex text-accent-500 text-xs">
-                                        <i data-lucide="star" class="w-3 h-3 fill-current"></i>
-                                        <i data-lucide="star" class="w-3 h-3 fill-current"></i>
-                                        <i data-lucide="star" class="w-3 h-3 fill-current"></i>
-                                        <i data-lucide="star" class="w-3 h-3 fill-current"></i>
-                                        <i data-lucide="star-half" class="w-3 h-3 fill-current"></i>
-                                    </div>
-                                </div>
                                 <h3 class="text-xl font-bold text-slate-900 mb-2 group-hover:text-brand-600 transition-colors">Mathematics Mastery</h3>
                                 <p class="text-slate-500 text-sm mb-4 line-clamp-2">Comprehensive coverage of Algebra, Geometry, and Trigonometry.</p>
-                                
                                 <div class="mt-auto pt-4 border-t border-slate-100 flex justify-between items-center">
-                                    <div>
-                                        <span class="text-2xl font-bold text-slate-900">₹4,999</span>
-                                        <span class="text-sm text-slate-400 line-through ml-1">₹8,000</span>
-                                    </div>
-                                    <button class="buy-now-btn w-10 h-10 rounded-full bg-brand-50 text-brand-600 flex items-center justify-center hover:bg-brand-600 hover:text-white transition-all">
-                                        <i data-lucide="arrow-right" class="w-5 h-5"></i>
-                                    </button>
+                                    <div><span class="text-2xl font-bold text-slate-900">₹4,999</span></div>
+                                    <button class="buy-now-btn w-10 h-10 rounded-full bg-brand-50 text-brand-600 flex items-center justify-center hover:bg-brand-600 hover:text-white transition-all"><i data-lucide="arrow-right" class="w-5 h-5"></i></button>
                                 </div>
                             </div>
                         </div>
-
-                        <!-- Card 2 -->
-                        <div class="course-card group bg-white rounded-2xl shadow-card hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 border border-slate-100 overflow-hidden flex flex-col"
-                             data-grade="9" data-title="Grade 9 - Science Explorer" data-description="Physics, Chemistry, and Biology simplified. Interactive experiments and visualizations." data-price="4499" data-subjects="Science" data-videos="55">
-                            <div class="relative h-48 overflow-hidden">
-                                <img src="https://placehold.co/600x400/0369a1/white?text=Grade+9+Science" alt="Course" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
-                                <div class="absolute top-3 right-3 bg-accent-500 text-white px-2 py-1 rounded-md text-xs font-bold shadow-sm">
-                                    New
-                                </div>
-                            </div>
-                            <div class="p-6 flex flex-col flex-grow">
-                                <div class="flex items-center justify-between mb-3">
-                                    <span class="text-xs font-bold text-brand-600 bg-brand-50 px-2 py-1 rounded uppercase tracking-wider">Grade 9</span>
-                                    <div class="flex text-accent-500 text-xs">
-                                        <i data-lucide="star" class="w-3 h-3 fill-current"></i>
-                                        <i data-lucide="star" class="w-3 h-3 fill-current"></i>
-                                        <i data-lucide="star" class="w-3 h-3 fill-current"></i>
-                                        <i data-lucide="star" class="w-3 h-3 fill-current"></i>
-                                        <i data-lucide="star" class="w-3 h-3 fill-current"></i>
-                                    </div>
-                                </div>
-                                <h3 class="text-xl font-bold text-slate-900 mb-2 group-hover:text-brand-600 transition-colors">Science Explorer</h3>
-                                <p class="text-slate-500 text-sm mb-4 line-clamp-2">Physics, Chemistry, and Biology simplified with interactive experiments.</p>
-                                
-                                <div class="mt-auto pt-4 border-t border-slate-100 flex justify-between items-center">
-                                    <div>
-                                        <span class="text-2xl font-bold text-slate-900">₹4,499</span>
-                                    </div>
-                                    <button class="buy-now-btn w-10 h-10 rounded-full bg-brand-50 text-brand-600 flex items-center justify-center hover:bg-brand-600 hover:text-white transition-all">
-                                        <i data-lucide="arrow-right" class="w-5 h-5"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Card 3 -->
-                        <div class="course-card group bg-white rounded-2xl shadow-card hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 border border-slate-100 overflow-hidden flex flex-col"
-                             data-grade="8" data-title="Grade 8 - English Excellence" data-description="Master grammar, creative writing, and literature. Boost your confidence in English." data-price="2999" data-subjects="English" data-videos="40">
-                            <div class="relative h-48 overflow-hidden">
-                                <img src="https://placehold.co/600x400/0f766e/white?text=Grade+8+English" alt="Course" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
-                            </div>
-                            <div class="p-6 flex flex-col flex-grow">
-                                <div class="flex items-center justify-between mb-3">
-                                    <span class="text-xs font-bold text-brand-600 bg-brand-50 px-2 py-1 rounded uppercase tracking-wider">Grade 8</span>
-                                    <div class="flex text-accent-500 text-xs">
-                                        <i data-lucide="star" class="w-3 h-3 fill-current"></i>
-                                        <i data-lucide="star" class="w-3 h-3 fill-current"></i>
-                                        <i data-lucide="star" class="w-3 h-3 fill-current"></i>
-                                        <i data-lucide="star" class="w-3 h-3 fill-current"></i>
-                                        <i data-lucide="star" class="w-3 h-3 text-slate-300"></i>
-                                    </div>
-                                </div>
-                                <h3 class="text-xl font-bold text-slate-900 mb-2 group-hover:text-brand-600 transition-colors">English Excellence</h3>
-                                <p class="text-slate-500 text-sm mb-4 line-clamp-2">Master grammar, creative writing, and literature.</p>
-                                
-                                <div class="mt-auto pt-4 border-t border-slate-100 flex justify-between items-center">
-                                    <div>
-                                        <span class="text-2xl font-bold text-slate-900">₹2,999</span>
-                                    </div>
-                                    <button class="buy-now-btn w-10 h-10 rounded-full bg-brand-50 text-brand-600 flex items-center justify-center hover:bg-brand-600 hover:text-white transition-all">
-                                        <i data-lucide="arrow-right" class="w-5 h-5"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Card 4 -->
-                        <div class="course-card group bg-white rounded-2xl shadow-card hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 border border-slate-100 overflow-hidden flex flex-col"
-                             data-grade="10" data-title="Grade 10 - Social Science" data-description="History, Civics, Geography, and Economics. Prepare for boards effectively." data-price="3999" data-subjects="Social Science" data-videos="50">
-                            <div class="relative h-48 overflow-hidden">
-                                <img src="https://placehold.co/600x400/b45309/white?text=Grade+10+Social+Sc" alt="Course" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
-                            </div>
-                            <div class="p-6 flex flex-col flex-grow">
-                                <div class="flex items-center justify-between mb-3">
-                                    <span class="text-xs font-bold text-brand-600 bg-brand-50 px-2 py-1 rounded uppercase tracking-wider">Grade 10</span>
-                                    <div class="flex text-accent-500 text-xs">
-                                        <i data-lucide="star" class="w-3 h-3 fill-current"></i>
-                                        <i data-lucide="star" class="w-3 h-3 fill-current"></i>
-                                        <i data-lucide="star" class="w-3 h-3 fill-current"></i>
-                                        <i data-lucide="star" class="w-3 h-3 fill-current"></i>
-                                        <i data-lucide="star-half" class="w-3 h-3 fill-current"></i>
-                                    </div>
-                                </div>
-                                <h3 class="text-xl font-bold text-slate-900 mb-2 group-hover:text-brand-600 transition-colors">Social Science</h3>
-                                <p class="text-slate-500 text-sm mb-4 line-clamp-2">History, Civics, Geography, and Economics.</p>
-                                
-                                <div class="mt-auto pt-4 border-t border-slate-100 flex justify-between items-center">
-                                    <div>
-                                        <span class="text-2xl font-bold text-slate-900">₹3,999</span>
-                                    </div>
-                                    <button class="buy-now-btn w-10 h-10 rounded-full bg-brand-50 text-brand-600 flex items-center justify-center hover:bg-brand-600 hover:text-white transition-all">
-                                        <i data-lucide="arrow-right" class="w-5 h-5"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </section>
-
-            <!-- Features Section (Redesigned) -->
-            <section id="features" class="py-24 bg-slate-50 border-t border-slate-200">
-                <div class="container mx-auto px-6">
-                    <div class="text-center mb-16">
-                        <h2 class="text-3xl md:text-4xl font-bold text-slate-900">Why Learners Trust Us</h2>
-                        <p class="mt-4 text-lg text-slate-500">Built for student success, powered by technology.</p>
-                    </div>
-
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                        <div class="bg-white p-8 rounded-2xl shadow-lg border border-slate-100 hover:border-brand-200 transition-colors">
-                            <div class="w-14 h-14 bg-brand-100 rounded-xl flex items-center justify-center text-brand-600 mb-6">
-                                <i data-lucide="video" class="w-7 h-7"></i>
-                            </div>
-                            <h3 class="text-xl font-bold text-slate-900 mb-3">HD Video Lessons</h3>
-                            <p class="text-slate-500">Crystal clear conceptual videos recorded by India's top educators. Watch anytime, anywhere.</p>
-                        </div>
-                        <div class="bg-white p-8 rounded-2xl shadow-lg border border-slate-100 hover:border-brand-200 transition-colors">
-                            <div class="w-14 h-14 bg-purple-100 rounded-xl flex items-center justify-center text-purple-600 mb-6">
-                                <i data-lucide="bar-chart-3" class="w-7 h-7"></i>
-                            </div>
-                            <h3 class="text-xl font-bold text-slate-900 mb-3">Analytics Dashboard</h3>
-                            <p class="text-slate-500">Track your strengths and weaknesses with detailed reports and performance graphs.</p>
-                        </div>
-                        <div class="bg-white p-8 rounded-2xl shadow-lg border border-slate-100 hover:border-brand-200 transition-colors">
-                            <div class="w-14 h-14 bg-green-100 rounded-xl flex items-center justify-center text-green-600 mb-6">
-                                <i data-lucide="shield-check" class="w-7 h-7"></i>
-                            </div>
-                            <h3 class="text-xl font-bold text-slate-900 mb-3">Safe & Secure</h3>
-                            <p class="text-slate-500">Your data is encrypted. Learning environment is moderated for student safety.</p>
-                        </div>
+                        <!-- More cards would go here -->
                     </div>
                 </div>
             </section>
 
             <!-- Footer -->
             <footer class="bg-brand-950 text-slate-400 py-16 border-t border-brand-900">
-                <div class="container mx-auto px-6">
-                    <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
-                        <!-- Brand -->
-                        <div>
-                            <h3 class="text-2xl font-bold text-white mb-6">Vidyantrix</h3>
-                            <p class="text-sm leading-relaxed mb-6">Empowering the next generation of thinkers and leaders through accessible, high-quality education.</p>
-                            <div class="flex space-x-4">
-                                <a href="#" class="text-slate-400 hover:text-white transition-colors"><i data-lucide="facebook" class="w-5 h-5"></i></a>
-                                <a href="#" class="text-slate-400 hover:text-white transition-colors"><i data-lucide="twitter" class="w-5 h-5"></i></a>
-                                <a href="#" class="text-slate-400 hover:text-white transition-colors"><i data-lucide="instagram" class="w-5 h-5"></i></a>
-                                <a href="#" class="text-slate-400 hover:text-white transition-colors"><i data-lucide="linkedin" class="w-5 h-5"></i></a>
-                            </div>
-                        </div>
-                        <!-- Links -->
-                        <div>
-                            <h4 class="text-lg font-semibold text-white mb-6">Platform</h4>
-                            <ul class="space-y-3 text-sm">
-                                <li><a href="#" class="hover:text-brand-400 transition-colors">Browse Courses</a></li>
-                                <li><a href="#" class="hover:text-brand-400 transition-colors">Live Classes</a></li>
-                                <li><a href="#" class="hover:text-brand-400 transition-colors">Success Stories</a></li>
-                                <li><a href="#" class="hover:text-brand-400 transition-colors">Pricing</a></li>
-                            </ul>
-                        </div>
-                        <!-- Company -->
-                        <div>
-                            <h4 class="text-lg font-semibold text-white mb-6">Company</h4>
-                            <ul class="space-y-3 text-sm">
-                                <li><a href="#" class="hover:text-brand-400 transition-colors">About Us</a></li>
-                                <li><a href="#" class="hover:text-brand-400 transition-colors">Careers</a></li>
-                                <li><a href="#" class="hover:text-brand-400 transition-colors">Blog</a></li>
-                                <li><a href="#" class="hover:text-brand-400 transition-colors">Contact</a></li>
-                            </ul>
-                        </div>
-                        <!-- Newsletter -->
-                        <div>
-                            <h4 class="text-lg font-semibold text-white mb-6">Stay Updated</h4>
-                            <p class="text-sm mb-4">Subscribe to get the latest course updates.</p>
-                            <div class="flex">
-                                <input type="email" placeholder="Email Address" class="bg-brand-900 border border-brand-800 text-white text-sm rounded-l-lg px-4 py-2.5 outline-none focus:border-brand-600 w-full">
-                                <button class="bg-brand-600 hover:bg-brand-500 text-white px-4 rounded-r-lg font-medium transition-colors">
-                                    <i data-lucide="arrow-right" class="w-4 h-4"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="mt-16 pt-8 border-t border-brand-900 text-center text-sm flex flex-col md:flex-row justify-between items-center">
-                        <p>&copy; 2024 Vidyantrix. All rights reserved.</p>
-                        <div class="flex space-x-6 mt-4 md:mt-0">
-                            <a href="#" class="hover:text-white">Privacy Policy</a>
-                            <a href="#" class="hover:text-white">Terms of Service</a>
-                            <a href="#" class="hover:text-white">Cookie Policy</a>
-                        </div>
-                    </div>
+                <div class="container mx-auto px-6 text-center">
+                    <p>&copy; 2024 Vidyantrix. All rights reserved.</p>
                 </div>
             </footer>
-
         </div>
-        <!-- End Landing Page -->
 
 
         <!-- Course Preview Modal -->
         <div id="course-preview-modal" class="hidden fixed inset-0 bg-slate-900/80 backdrop-blur-sm z-[100] flex items-center justify-center p-4 opacity-0 transition-opacity duration-300">
-            <!-- Modal Content -->
             <div class="relative bg-white w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-2xl shadow-2xl scale-95 transition-transform duration-300 transform" id="modal-panel">
-                <!-- Modal Header -->
                 <div class="flex justify-between items-start p-6 border-b border-slate-100">
-                    <div>
-                        <h3 id="modal-title" class="text-2xl font-bold text-slate-900 pr-4">Course Title</h3>
-                        <span class="text-xs font-bold text-brand-600 bg-brand-50 px-2 py-1 rounded uppercase tracking-wider mt-1 inline-block">Preview</span>
-                    </div>
-                    <button id="modal-close-btn" class="text-slate-400 hover:bg-slate-100 hover:text-slate-900 rounded-full p-2 transition-colors">
-                        <i data-lucide="x" class="w-5 h-5"></i>
-                    </button>
+                    <h3 id="modal-title" class="text-2xl font-bold text-slate-900 pr-4">Course Title</h3>
+                    <button id="modal-close-btn" class="text-slate-400 hover:bg-slate-100 hover:text-slate-900 rounded-full p-2 transition-colors"><i data-lucide="x" class="w-5 h-5"></i></button>
                 </div>
-                <!-- Modal Body -->
                 <div class="p-6 space-y-6">
                     <img id="modal-image" src="" alt="Course Image" class="w-full h-64 object-cover rounded-xl shadow-md">
-                    <div>
-                        <h4 class="font-semibold text-slate-900 mb-2">Description</h4>
-                        <p id="modal-description" class="text-slate-600 leading-relaxed">Course Description</p>
-                    </div>
+                    <p id="modal-description" class="text-slate-600 leading-relaxed">Description</p>
                     <div class="grid grid-cols-2 gap-4">
-                        <div class="bg-slate-50 p-4 rounded-xl">
-                            <div class="flex items-center text-slate-500 text-xs uppercase font-bold mb-1">
-                                <i data-lucide="book-open" class="w-3 h-3 mr-1"></i> Subject
-                            </div>
-                            <div class="font-semibold text-slate-900" id="modal-subjects">Subject</div>
-                        </div>
-                        <div class="bg-slate-50 p-4 rounded-xl">
-                            <div class="flex items-center text-slate-500 text-xs uppercase font-bold mb-1">
-                                <i data-lucide="film" class="w-3 h-3 mr-1"></i> Content
-                            </div>
-                            <div class="font-semibold text-slate-900" id="modal-videos">0 Videos</div>
-                        </div>
+                        <div class="bg-slate-50 p-4 rounded-xl"><div class="font-semibold text-slate-900" id="modal-subjects">Subject</div></div>
+                        <div class="bg-slate-50 p-4 rounded-xl"><div class="font-semibold text-slate-900" id="modal-videos">0 Videos</div></div>
                     </div>
                 </div>
-                <!-- Modal Footer -->
                 <div class="flex items-center justify-between p-6 border-t border-slate-100 bg-slate-50 rounded-b-2xl">
-                    <div>
-                        <span class="text-xs text-slate-500 block">Total Price</span>
-                        <span id="modal-price" class="text-3xl font-bold text-slate-900">₹0</span>
-                    </div>
-                    <button id="start-course-btn" class="px-8 py-3 bg-brand-600 text-white rounded-xl font-semibold hover:bg-brand-700 transition-all shadow-lg hover:shadow-brand-500/30 transform hover:-translate-y-0.5">
-                        Start Learning Now
-                    </button>
+                    <span id="modal-price" class="text-3xl font-bold text-slate-900">₹0</span>
+                    <button id="start-course-btn" class="px-8 py-3 bg-brand-600 text-white rounded-xl font-semibold hover:bg-brand-700 transition-all shadow-lg hover:shadow-brand-500/30 transform hover:-translate-y-0.5">Start Learning Now</button>
                 </div>
             </div>
         </div>
@@ -584,37 +329,56 @@
 
         <!-- Course Player Section -->
         <div id="course-player-page" class="hidden min-h-screen bg-slate-100">
-            <header class="bg-white shadow-sm z-20 sticky top-0 border-b border-slate-200">
-                <div class="container mx-auto px-6 py-3 flex justify-between items-center">
+            <!-- FIXED: Sticky header remains, but we will add padding to the container below to clear it -->
+            <header class="bg-white shadow-sm z-20 sticky top-0 border-b border-slate-200 h-16 flex items-center">
+                <div class="container mx-auto px-6 flex justify-between items-center w-full">
                     <a href="#" class="text-xl font-extrabold text-slate-900 flex items-center gap-2">
                         <div class="w-6 h-6 bg-brand-600 rounded flex items-center justify-center text-white text-xs">V</div>
                         Vidyantrix
                     </a>
-                    <h2 id="player-course-title" class="text-sm font-semibold text-slate-600 hidden md:block border-l border-slate-200 pl-4 ml-4">
-                        <!-- Dynamic Title -->
-                    </h2>
+                    <h2 id="player-course-title" class="text-sm font-semibold text-slate-600 hidden md:block border-l border-slate-200 pl-4 ml-4"></h2>
                     <a href="#" id="exit-player-btn" class="text-xs font-bold uppercase tracking-wide text-slate-500 hover:text-brand-600 flex items-center border border-slate-200 px-3 py-1.5 rounded-md hover:bg-slate-50 transition-colors">
                         <i data-lucide="log-out" class="w-3 h-3 mr-2"></i> Exit
                     </a>
                 </div>
             </header>
 
-            <div class="container mx-auto p-4 lg:p-8">
+            <!-- FIXED: Added 'pt-8' explicitly and ensure margin top to clear fixed elements if any issues arise -->
+            <div class="container mx-auto p-4 lg:p-8 lg:pt-12">
                 <h2 id="mobile-player-course-title" class="text-xl font-bold text-slate-900 mb-4 md:hidden"></h2>
                 <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
                     <!-- Main Video Player -->
                     <div class="lg:col-span-2">
-                        <!-- Added ID 'video-wrapper' for safe DOM resetting -->
-                        <div id="video-wrapper" class="bg-black rounded-xl shadow-2xl overflow-hidden border border-slate-800 aspect-video">
-                            <div id="video-player" class="plyr__video-embed">
-                                <iframe
-                                    src="https://www.youtube.com/embed/bTqVqk7FSmY?origin=https://plyr.io&amp;iv_load_policy=3&amp;modestbranding=1&amp;playsinline=1&amp;showinfo=0&amp;rel=0&amp;enablejsapi=1"
-                                    allowfullscreen
-                                    allowtransparency
-                                    allow="autoplay"
-                                ></iframe>
+                        <div class="relative">
+                            <div id="video-wrapper" class="bg-black rounded-xl shadow-2xl overflow-hidden border border-slate-800 aspect-video relative z-10">
+                                <div id="video-player" class="plyr__video-embed">
+                                    <iframe src="" allowfullscreen allowtransparency allow="autoplay"></iframe>
+                                </div>
+                            </div>
+                            
+                            <!-- Rating Overlay (Hidden by default) -->
+                            <div id="rating-overlay" class="hidden absolute inset-0 z-20 bg-slate-900/95 rounded-xl flex flex-col items-center justify-center text-center p-6 backdrop-blur-sm transition-all duration-500 opacity-0">
+                                <div class="w-16 h-16 bg-brand-900/50 rounded-full flex items-center justify-center mb-4 border border-brand-500/30">
+                                    <i data-lucide="star" class="w-8 h-8 text-brand-400"></i>
+                                </div>
+                                <h3 class="text-2xl font-bold text-white mb-2">Rate this Class</h3>
+                                <p class="text-slate-400 text-sm mb-6 max-w-xs">How helpful was this video lesson? Your feedback helps us improve.</p>
+                                
+                                <div class="flex gap-2 mb-8" id="star-container">
+                                    <button class="star-btn p-1" data-value="1"><i data-lucide="star" class="w-8 h-8 text-slate-600 fill-current"></i></button>
+                                    <button class="star-btn p-1" data-value="2"><i data-lucide="star" class="w-8 h-8 text-slate-600 fill-current"></i></button>
+                                    <button class="star-btn p-1" data-value="3"><i data-lucide="star" class="w-8 h-8 text-slate-600 fill-current"></i></button>
+                                    <button class="star-btn p-1" data-value="4"><i data-lucide="star" class="w-8 h-8 text-slate-600 fill-current"></i></button>
+                                    <button class="star-btn p-1" data-value="5"><i data-lucide="star" class="w-8 h-8 text-slate-600 fill-current"></i></button>
+                                </div>
+                                
+                                <button id="submit-rating-btn" class="px-8 py-2.5 bg-brand-600 hover:bg-brand-500 text-white rounded-full font-semibold transition-all shadow-lg shadow-brand-500/20 disabled:opacity-50 disabled:cursor-not-allowed">
+                                    Submit Feedback
+                                </button>
+                                <button id="skip-rating-btn" class="mt-4 text-xs text-slate-500 hover:text-slate-300 underline">Skip</button>
                             </div>
                         </div>
+
                         <div class="mt-4 bg-white p-6 rounded-xl shadow-sm border border-slate-200">
                             <h1 class="text-xl font-bold text-slate-900 mb-2" id="current-video-title">1.1.1 Welcome to the Course</h1>
                             <p class="text-slate-500 text-sm">Watch this video to understand the course structure and learning outcomes.</p>
@@ -623,11 +387,10 @@
 
                     <!-- Syllabus -->
                     <div class="lg:col-span-1">
-                        <div class="bg-white rounded-xl shadow-lg border border-slate-200 overflow-hidden flex flex-col h-[80vh] lg:h-auto sticky top-20">
+                        <div class="bg-white rounded-xl shadow-lg border border-slate-200 overflow-hidden flex flex-col h-[80vh] lg:h-auto sticky top-24">
                             <div class="p-4 border-b border-slate-100 bg-slate-50">
                                 <h3 class="font-bold text-slate-900">Course Content</h3>
                                 <div class="w-full bg-slate-200 rounded-full h-1.5 mt-2">
-                                    <!-- FIXED: Changed initial progress from 15% to 0% -->
                                     <div class="bg-brand-500 h-1.5 rounded-full" style="width: 0%"></div>
                                 </div>
                                 <p class="text-xs text-slate-500 mt-1">0% Completed</p>
@@ -658,16 +421,6 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!-- Mock more modules -->
-                                <div class="border border-slate-200 rounded-lg overflow-hidden">
-                                    <button class="module-toggle-btn w-full p-3 flex justify-between items-center text-left bg-slate-50 hover:bg-slate-100 transition-colors">
-                                        <span class="font-semibold text-sm text-slate-800">Module 2: Advanced Topics</span>
-                                        <i data-lucide="chevron-down" class="w-4 h-4 text-slate-400"></i>
-                                    </button>
-                                    <div class="chapter-list hidden bg-white p-4 text-center text-xs text-slate-400">
-                                        Locked content
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -681,13 +434,9 @@
     <script>
         window.addEventListener('load', () => {
             try {
-                // --- 1. Announcement Bar - Image Logic (No text carousel) ---
-                // User can replace src in HTML to update banner.
-
-                // --- 2. Lucide Icons ---
                 if (typeof lucide !== 'undefined') lucide.createIcons();
 
-                // --- 3. Sticky Navbar Style on Scroll ---
+                // Sticky Navbar
                 const navbar = document.getElementById('navbar');
                 window.addEventListener('scroll', () => {
                     if (window.scrollY > 50) {
@@ -699,7 +448,7 @@
                     }
                 });
 
-                // --- 4. General UI Logic (Modals, Filters) ---
+                // General UI (Mobile Menu, Modals)
                 const mobileMenuBtn = document.getElementById('mobile-menu-btn');
                 const mobileMenu = document.getElementById('mobile-menu');
                 const buyNowBtns = document.querySelectorAll('.buy-now-btn');
@@ -713,9 +462,16 @@
                 const coursePlayerPage = document.getElementById('course-player-page');
                 const exitPlayerBtn = document.getElementById('exit-player-btn');
                 const currentVideoTitleEl = document.getElementById('current-video-title');
+                
+                // Rating UI Elements
+                const ratingOverlay = document.getElementById('rating-overlay');
+                const starBtns = document.querySelectorAll('.star-btn');
+                const submitRatingBtn = document.getElementById('submit-rating-btn');
+                const skipRatingBtn = document.getElementById('skip-rating-btn');
+                
                 let player;
+                let currentRating = 0;
 
-                // Mobile Menu
                 if (mobileMenuBtn) {
                     mobileMenuBtn.addEventListener('click', () => {
                         mobileMenu.classList.toggle('hidden');
@@ -723,28 +479,7 @@
                     });
                 }
 
-                // Filter Logic
-                gradeFilterBtns.forEach(button => {
-                    button.addEventListener('click', () => {
-                        const selectedGrade = button.getAttribute('data-grade');
-                        gradeFilterBtns.forEach(btn => {
-                            btn.classList.remove('bg-brand-600', 'text-white', 'shadow-lg');
-                            btn.classList.add('bg-white', 'text-slate-600', 'hover:bg-slate-100');
-                        });
-                        button.classList.remove('bg-white', 'text-slate-600', 'hover:bg-slate-100');
-                        button.classList.add('bg-brand-600', 'text-white', 'shadow-lg');
-
-                        courseCards.forEach(card => {
-                            if (selectedGrade === 'all' || card.getAttribute('data-grade') === selectedGrade) {
-                                card.style.display = 'flex';
-                            } else {
-                                card.style.display = 'none';
-                            }
-                        });
-                    });
-                });
-
-                // Modal Logic with Animations
+                // Modal Open/Close
                 const openModal = (card) => {
                     const title = card.getAttribute('data-title');
                     const description = card.getAttribute('data-description');
@@ -759,12 +494,9 @@
                     document.getElementById('modal-subjects').textContent = subjects;
                     document.getElementById('modal-videos').textContent = `${videos} Videos`;
                     document.getElementById('modal-image').src = image;
-                    
                     document.getElementById('player-course-title').textContent = title;
-                    document.getElementById('mobile-player-course-title').textContent = title;
 
                     modal.classList.remove('hidden');
-                    // Small delay to allow display:block to apply before opacity transition
                     setTimeout(() => {
                         modal.classList.remove('opacity-0');
                         modalPanel.classList.remove('scale-95');
@@ -783,15 +515,11 @@
                     }, 300);
                 };
 
-                buyNowBtns.forEach(btn => {
-                    btn.addEventListener('click', (e) => {
-                        e.stopPropagation(); // Prevent triggering card click if we add that later
-                        const card = e.target.closest('.course-card');
-                        openModal(card);
-                    });
-                });
+                buyNowBtns.forEach(btn => btn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    openModal(e.target.closest('.course-card'));
+                }));
                 
-                // Also allow clicking the image to open modal
                 courseCards.forEach(card => {
                     const img = card.querySelector('.relative');
                     if(img) {
@@ -801,19 +529,70 @@
                 });
 
                 if (modalCloseBtn) modalCloseBtn.addEventListener('click', closeModal);
-                modal.addEventListener('click', (e) => {
-                    if (e.target === modal) closeModal();
+
+                // --- Rating System Logic ---
+                const showRatingOverlay = () => {
+                    ratingOverlay.classList.remove('hidden');
+                    // Trigger reflow
+                    void ratingOverlay.offsetWidth;
+                    ratingOverlay.classList.remove('opacity-0');
+                };
+
+                const hideRatingOverlay = () => {
+                    ratingOverlay.classList.add('opacity-0');
+                    setTimeout(() => {
+                        ratingOverlay.classList.add('hidden');
+                        // Reset stars
+                        currentRating = 0;
+                        starBtns.forEach(btn => btn.classList.remove('active'));
+                    }, 500);
+                };
+
+                const markVideoComplete = () => {
+                    const activeLink = document.querySelector('.video-link.bg-brand-50');
+                    if (activeLink) {
+                        const iconContainer = activeLink.querySelector('svg') || activeLink.querySelector('i');
+                        if (iconContainer) {
+                            const greenCheck = document.createElement('i');
+                            greenCheck.setAttribute('data-lucide', 'check-circle-2');
+                            greenCheck.className = "w-3 h-3 text-green-600";
+                            iconContainer.replaceWith(greenCheck);
+                            lucide.createIcons();
+                        }
+                    }
+                };
+
+                starBtns.forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const val = parseInt(btn.getAttribute('data-value'));
+                        currentRating = val;
+                        starBtns.forEach(b => {
+                            const bVal = parseInt(b.getAttribute('data-value'));
+                            if (bVal <= val) b.classList.add('active');
+                            else b.classList.remove('active');
+                        });
+                    });
                 });
 
-                // Player Logic (Re-written for stability)
+                submitRatingBtn.addEventListener('click', () => {
+                    if (currentRating > 0) {
+                        // Here you would send 'currentRating' to backend
+                        hideRatingOverlay();
+                        markVideoComplete();
+                    }
+                });
+
+                skipRatingBtn.addEventListener('click', () => {
+                    hideRatingOverlay();
+                    markVideoComplete();
+                });
+
+
+                // --- Player Initialization ---
                 const initPlayer = () => {
                     try {
-                        if (player) {
-                            player.destroy();
-                        }
+                        if (player) player.destroy();
                         
-                        // Nuclear option: Re-write the container HTML to ensure a fresh start
-                        // Using the IFRAME method is more robust for YouTube in some environments
                         const videoWrapper = document.getElementById('video-wrapper');
                         videoWrapper.innerHTML = `
                             <div id="video-player" class="plyr__video-embed">
@@ -830,31 +609,9 @@
                             controls: ['play', 'progress', 'current-time', 'mute', 'volume', 'settings', 'fullscreen']
                         });
 
-                        // --- Video End Handler for Completion Tracking ---
                         player.on('ended', () => {
-                            // 1. Hide Suggested Videos: Reset/Stop the player instantly
                             player.stop(); 
-
-                            // 2. Green Tick Completion Logic
-                            const activeLink = document.querySelector('.video-link.bg-brand-50'); // Finds current active link
-                            if (activeLink) {
-                                // Replace icon logic
-                                // We search for the Lucide icon container (it's likely an SVG now)
-                                const iconContainer = activeLink.querySelector('svg') || activeLink.querySelector('i');
-                                
-                                if (iconContainer) {
-                                    // Create new green check icon
-                                    const greenCheck = document.createElement('i');
-                                    greenCheck.setAttribute('data-lucide', 'check-circle-2');
-                                    greenCheck.className = "w-3 h-3 text-green-600"; // Green color
-                                    
-                                    // Replace old icon with new green check
-                                    iconContainer.replaceWith(greenCheck);
-                                    
-                                    // Refresh Lucide to render the new icon
-                                    lucide.createIcons();
-                                }
-                            }
+                            showRatingOverlay(); // Trigger rating instead of just marking complete
                         });
 
                     } catch(e) { console.error("Player init failed", e); }
@@ -865,7 +622,6 @@
                     landingPage.classList.add('hidden');
                     coursePlayerPage.classList.remove('hidden');
                     window.scrollTo(0,0);
-                    // Timeout ensures the DOM is visible before Plyr tries to calculate dimensions
                     setTimeout(initPlayer, 100);
                 });
 
@@ -876,7 +632,7 @@
                     if(player) player.stop();
                 });
 
-                // Syllabus Toggles
+                // Toggles for Sidebar
                 document.querySelectorAll('.module-toggle-btn').forEach(btn => {
                     btn.addEventListener('click', () => {
                         const list = btn.nextElementSibling;
@@ -901,11 +657,9 @@
                         const vidId = link.getAttribute('data-video-id');
                         const vidTitle = link.getAttribute('data-title');
                         
-                        // Update active state styling
                         document.querySelectorAll('.video-link').forEach(l => {
                            l.classList.remove('bg-brand-50', 'text-brand-700'); 
                            l.classList.add('text-slate-600');
-                           // Reset icon color if needed, or keep green checks
                            const icon = l.querySelector('svg');
                            if(icon && !icon.classList.contains('text-green-600')) {
                                icon.classList.remove('fill-current');
@@ -913,21 +667,20 @@
                         });
                         link.classList.add('bg-brand-50', 'text-brand-700');
                         link.classList.remove('text-slate-600');
-                        // Ensure current play icon is filled
+                        
                         const currentIcon = link.querySelector('svg');
                         if(currentIcon && !currentIcon.classList.contains('text-green-600')){
                             currentIcon.classList.add('fill-current');
                         }
 
+                        // Reset overlay if switching videos manually
+                        ratingOverlay.classList.add('hidden');
+                        ratingOverlay.classList.add('opacity-0');
+
                         if(player && vidId) {
                             player.source = {
                                 type: 'video',
-                                sources: [
-                                    {
-                                        src: vidId,
-                                        provider: 'youtube',
-                                    },
-                                ],
+                                sources: [{ src: vidId, provider: 'youtube' }],
                             };
                             player.play();
                             currentVideoTitleEl.textContent = vidTitle;
