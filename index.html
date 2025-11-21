@@ -4,377 +4,429 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vidyantrix - Online Learning for Grades 5-10</title>
+    <title>Vidyantrix - Premium Online Learning</title>
     <!-- Load Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Load Plyr.js CSS -->
     <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
-    <!-- Load Google Font: Inter -->
+    <!-- Load Google Font: Plus Jakarta Sans (Premium feeling font) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
-    <!-- FIXED: Removed 'defer' to ensure scripts are loaded synchronously -->
-    <!-- This is a more robust fix for "Script error" issues -->
+    <!-- Load Scripts -->
     <script src="https://cdn.plyr.io/3.7.8/plyr.js"></script>
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
 
     <style>
-        /* REMOVED: Custom Plyr.js overlay styles that were causing script errors. */
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        /* Premium Gradient Text */
+        .text-gradient {
+            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Abstract Background Shapes */
+        .blob {
+            position: absolute;
+            filter: blur(50px);
+            z-index: 0;
+            opacity: 0.4;
+        }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+
+        /* --- PLAYER SECURITY BARRIER --- */
+        /* This ensures users cannot click the YouTube iframe directly */
+        /* Disables 'Watch on YouTube', 'Share', and Context Menu */
+        .plyr__video-embed iframe {
+            pointer-events: none;
         }
     </style>
     <script>
-        // Custom Tailwind Config
+        // Custom Tailwind Config with Premium Colors
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        primary: {
-                            '50': '#f0f9ff',
-                            '100': '#e0f2fe',
-                            '200': '#bae6fd',
-                            '300': '#7dd3fc',
-                            '400': '#38bdf8',
-                            '500': '#0ea5e9',
-                            '600': '#0284c7',
-                            '700': '#0369a1',
-                            '800': '#075985',
-                            '900': '#0c4a6e',
+                        brand: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            200: '#bfdbfe',
+                            300: '#93c5fd',
+                            400: '#60a5fa',
+                            500: '#3b82f6', // Primary Blue
+                            600: '#2563eb',
+                            700: '#1d4ed8', // Deep Royal
+                            800: '#1e40af',
+                            900: '#1e3a8a',
+                            950: '#172554',
                         },
+                        accent: {
+                            500: '#f59e0b', // Gold/Amber for highlighting
+                        }
                     },
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                    },
+                    boxShadow: {
+                        'glow': '0 0 20px rgba(59, 130, 246, 0.5)',
+                        'card': '0 10px 30px -10px rgba(0, 0, 0, 0.1)',
+                    }
                 }
             }
         }
     </script>
 </head>
 
-<body class="bg-gray-50">
+<body class="bg-slate-50 text-slate-800 antialiased selection:bg-brand-200 selection:text-brand-900">
 
     <!-- Global Container -->
-    <div id="app-container">
+    <div id="app-container" class="relative overflow-hidden">
 
-        <!-- Landing Page Section (Visible by default) -->
-        <div id="landing-page">
-            <!-- Header & Navigation -->
-            <header class="bg-white shadow-sm">
+        <!-- Background Decor for Premium Feel -->
+        <div class="blob bg-brand-300 w-96 h-96 rounded-full top-0 left-0 -translate-x-1/2 -translate-y-1/2 mix-blend-multiply"></div>
+        <div class="blob bg-purple-300 w-96 h-96 rounded-full bottom-0 right-0 translate-x-1/3 translate-y-1/3 mix-blend-multiply"></div>
+
+        <!-- Announcement Banner (Image Based) -->
+        <!-- EDIT HERE: Change the src attribute to your uploaded image URL -->
+        <div id="announcement-bar" class="relative z-[60] bg-brand-900">
+            <a href="#courses" class="block w-full">
+                <!-- Desktop Banner -->
+                <img src="https://placehold.co/1920x80/1e3a8a/ffffff?text=BIG+SALE:+Get+50%25+OFF+on+Grade+10+Courses!+Click+Here+to+Buy+Now" 
+                     alt="Announcement Banner" 
+                     class="hidden md:block w-full h-auto object-cover max-h-24" />
+                
+                <!-- Mobile Banner (Optional: Use a different image for mobile if needed) -->
+                <img src="https://placehold.co/800x100/1e3a8a/ffffff?text=50%25+OFF+Sale+-+Click+Here" 
+                     alt="Announcement Banner Mobile" 
+                     class="md:hidden w-full h-auto object-cover max-h-16" />
+            </a>
+        </div>
+
+        <!-- Landing Page Section -->
+        <div id="landing-page" class="relative z-10">
+            
+            <!-- Sticky Glassmorphism Navbar -->
+            <header class="sticky top-0 z-50 backdrop-blur-md bg-white/80 border-b border-slate-200/60 shadow-sm transition-all duration-300" id="navbar">
                 <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
                     <!-- Logo -->
-                    <a href="#" class="text-2xl font-bold text-primary-700">Vidyantrix</a>
+                    <a href="#" class="flex items-center gap-2 group">
+                        <div class="w-8 h-8 bg-gradient-to-br from-brand-600 to-brand-800 rounded-lg flex items-center justify-center text-white shadow-lg group-hover:shadow-brand-500/50 transition-all">
+                            <span class="font-bold text-lg">V</span>
+                        </div>
+                        <span class="text-2xl font-extrabold tracking-tight text-slate-900">Vidyantrix</span>
+                    </a>
 
                     <!-- Desktop Nav Links -->
-                    <div class="hidden md:flex items-center space-x-6">
-                        <a href="#hero" class="text-gray-600 hover:text-primary-600">Home</a>
-                        <a href="#courses" class="text-gray-600 hover:text-primary-600">Courses</a>
-                        <a href="#features" class="text-gray-600 hover:text-primary-600">Features</a>
-                        <a href="#" class="text-gray-600 hover:text-primary-600">Sign In</a>
-                        <a href="#"
-                            class="px-5 py-2.5 bg-primary-600 text-white rounded-lg font-medium hover:bg-primary-700 transition-colors">
+                    <div class="hidden md:flex items-center space-x-8">
+                        <a href="#hero" class="text-sm font-medium text-slate-600 hover:text-brand-600 transition-colors">Home</a>
+                        <a href="#courses" class="text-sm font-medium text-slate-600 hover:text-brand-600 transition-colors">Courses</a>
+                        <a href="#features" class="text-sm font-medium text-slate-600 hover:text-brand-600 transition-colors">Features</a>
+                        <div class="h-4 w-px bg-slate-300"></div>
+                        <a href="#" class="text-sm font-medium text-slate-600 hover:text-brand-600 transition-colors">Sign In</a>
+                        <a href="#" class="px-5 py-2.5 bg-gradient-to-r from-brand-600 to-brand-700 text-white rounded-full text-sm font-semibold hover:shadow-lg hover:shadow-brand-500/30 hover:-translate-y-0.5 transition-all duration-300">
                             Get Started
                         </a>
                     </div>
 
                     <!-- Mobile Menu Button -->
-                    <button id="mobile-menu-btn" class="md:hidden text-gray-700" aria-label="Open menu">
+                    <button id="mobile-menu-btn" class="md:hidden text-slate-700 hover:text-brand-600 transition-colors" aria-label="Open menu">
                         <i data-lucide="menu" class="w-6 h-6"></i>
                     </button>
                 </nav>
 
-                <!-- Mobile Menu (Hidden by default) -->
-                <div id="mobile-menu" class="hidden md:hidden px-6 pb-4 space-y-3">
-                    <a href="#hero" class="block text-gray-600 hover:text-primary-600">Home</a>
-                    <a href="#courses" class="block text-gray-600 hover:text-primary-600">Courses</a>
-                    <a href="#features" class="block text-gray-600 hover:text-primary-600">Features</a>
-                    <a href="#" class="block text-gray-600 hover:text-primary-600">Sign In</a>
-                    <a href="#"
-                        class="block px-5 py-2.5 bg-primary-600 text-white rounded-lg font-medium hover:bg-primary-700 transition-colors text-center">
-                        Get Started
-                    </a>
+                <!-- Mobile Menu -->
+                <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-slate-100 absolute w-full shadow-xl">
+                    <div class="px-6 py-4 space-y-3">
+                        <a href="#hero" class="block text-slate-600 hover:text-brand-600 font-medium">Home</a>
+                        <a href="#courses" class="block text-slate-600 hover:text-brand-600 font-medium">Courses</a>
+                        <a href="#features" class="block text-slate-600 hover:text-brand-600 font-medium">Features</a>
+                        <hr class="border-slate-100">
+                        <a href="#" class="block text-slate-600 hover:text-brand-600 font-medium">Sign In</a>
+                        <a href="#" class="block w-full text-center px-5 py-3 bg-brand-600 text-white rounded-lg font-semibold">Get Started</a>
+                    </div>
                 </div>
             </header>
 
-            <!-- Hero Section -->
-            <section id="hero" class="py-20 bg-white">
-                <div class="container mx-auto px-6 text-center">
-                    <h1 class="text-4xl md:text-6xl font-extrabold text-gray-900 leading-tight">
-                        Unlock Your Potential with
-                        <span class="text-primary-600">Vidyantrix</span>
-                    </h1>
-                    <p class="mt-6 text-lg text-gray-600 max-w-2xl mx-auto">
-                        Your one-stop learning platform for Grades 5-10. Access high-quality recorded classes, track
-                        your progress, and excel in your studies.
-                    </p>
-                    <a href="#courses"
-                        class="mt-10 inline-block px-8 py-4 bg-primary-600 text-white rounded-lg font-medium text-lg hover:bg-primary-700 transition-all shadow-lg hover:shadow-xl">
-                        Browse Courses
-                    </a>
+            <!-- Premium Hero Section -->
+            <section id="hero" class="relative pt-16 pb-24 lg:pt-24 lg:pb-32 overflow-hidden">
+                <div class="container mx-auto px-6">
+                    <div class="flex flex-col lg:flex-row items-center gap-12">
+                        <!-- Text Content -->
+                        <div class="lg:w-1/2 text-center lg:text-left z-10">
+                            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-50 border border-brand-100 text-brand-700 text-xs font-bold uppercase tracking-wide mb-6">
+                                <span class="w-2 h-2 rounded-full bg-brand-500 animate-pulse"></span>
+                                New Batches Starting Soon
+                            </div>
+                            <h1 class="text-4xl lg:text-6xl font-extrabold text-slate-900 leading-[1.15] tracking-tight mb-6">
+                                Master Your Grades with <span class="text-gradient">Vidyantrix</span>
+                            </h1>
+                            <p class="text-lg text-slate-600 mb-8 leading-relaxed max-w-xl mx-auto lg:mx-0">
+                                Experience a world-class learning platform for Grades 5-10. Interactive video lessons, real-time progress tracking, and expert guidance designed to help you excel.
+                            </p>
+                            <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                                <a href="#courses" class="px-8 py-4 bg-brand-600 text-white rounded-xl font-semibold hover:bg-brand-700 transition-all hover:shadow-xl hover:shadow-brand-500/20 flex items-center justify-center gap-2">
+                                    Explore Courses <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                                </a>
+                                <a href="#features" class="px-8 py-4 bg-white text-slate-700 border border-slate-200 rounded-xl font-semibold hover:bg-slate-50 hover:border-slate-300 transition-all flex items-center justify-center gap-2">
+                                    <i data-lucide="play-circle" class="w-4 h-4 text-brand-600"></i> Watch Demo
+                                </a>
+                            </div>
+                            
+                            <div class="mt-10 flex items-center justify-center lg:justify-start gap-6 text-sm font-medium text-slate-500">
+                                <div class="flex items-center gap-2">
+                                    <div class="flex -space-x-2">
+                                        <div class="w-8 h-8 rounded-full bg-slate-200 border-2 border-white"></div>
+                                        <div class="w-8 h-8 rounded-full bg-slate-300 border-2 border-white"></div>
+                                        <div class="w-8 h-8 rounded-full bg-slate-400 border-2 border-white"></div>
+                                    </div>
+                                    <span>10k+ Students</span>
+                                </div>
+                                <div class="w-1 h-1 bg-slate-300 rounded-full"></div>
+                                <div class="flex items-center gap-1">
+                                    <i data-lucide="star" class="w-4 h-4 text-accent-500 fill-current"></i>
+                                    <span>4.9/5 Rating</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Visual Content (CSS Composition) -->
+                        <div class="lg:w-1/2 relative z-10">
+                            <div class="relative w-full max-w-lg mx-auto aspect-square">
+                                <!-- Abstract decorative circles -->
+                                <div class="absolute inset-0 bg-gradient-to-tr from-brand-100 to-white rounded-full opacity-50 blur-3xl"></div>
+                                
+                                <!-- Main Card Stack Visual -->
+                                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3/4 h-3/4 bg-white rounded-3xl shadow-2xl border border-slate-100 flex flex-col overflow-hidden transform rotate-3 hover:rotate-0 transition-transform duration-500">
+                                    <div class="bg-slate-100 h-32 w-full flex items-center justify-center">
+                                        <i data-lucide="graduation-cap" class="w-16 h-16 text-brand-200"></i>
+                                    </div>
+                                    <div class="p-6 space-y-3">
+                                        <div class="h-4 bg-slate-100 rounded w-3/4"></div>
+                                        <div class="h-4 bg-slate-100 rounded w-1/2"></div>
+                                        <div class="h-12 mt-4 bg-brand-50 rounded-lg border border-brand-100 flex items-center px-4 gap-3">
+                                            <div class="w-8 h-8 rounded-full bg-brand-200 flex items-center justify-center text-brand-600">
+                                                <i data-lucide="play" class="w-4 h-4 fill-current"></i>
+                                            </div>
+                                            <div class="text-xs font-semibold text-brand-800">Now Playing: Algebra Basics</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Floating Elements -->
+                                <div class="absolute top-10 right-0 bg-white p-4 rounded-2xl shadow-lg border border-slate-100 animate-[bounce_3s_infinite]">
+                                    <div class="flex items-center gap-3">
+                                        <div class="bg-green-100 p-2 rounded-full text-green-600">
+                                            <i data-lucide="check-circle-2" class="w-6 h-6"></i>
+                                        </div>
+                                        <div>
+                                            <div class="text-xs text-slate-500">Daily Goals</div>
+                                            <div class="font-bold text-slate-800">Completed</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="absolute bottom-10 left-0 bg-white p-4 rounded-2xl shadow-lg border border-slate-100 animate-[pulse_4s_infinite]">
+                                    <div class="flex items-center gap-3">
+                                        <div class="bg-brand-100 p-2 rounded-full text-brand-600">
+                                            <i data-lucide="video" class="w-6 h-6"></i>
+                                        </div>
+                                        <div>
+                                            <div class="text-xs text-slate-500">Live Class</div>
+                                            <div class="font-bold text-slate-800">In 5 Mins</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </section>
 
-            <!-- Features Section -->
-            <section id="features" class="py-24">
-                <div class="container mx-auto px-6">
-                    <div class="text-center mb-16">
-                        <h2 class="text-3xl md:text-4xl font-bold text-gray-900">Why Choose Vidyantrix?</h2>
-                        <p class="mt-4 text-lg text-gray-600">Everything you need to succeed, all in one place.</p>
+            <!-- Stats Section -->
+            <section class="py-10 bg-white border-y border-slate-100">
+                <div class="container mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                    <div class="p-4">
+                        <div class="text-3xl font-bold text-brand-600 mb-1">500+</div>
+                        <div class="text-sm text-slate-500 font-medium">Video Lessons</div>
                     </div>
-
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                        <!-- Feature 1 -->
-                        <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-100">
-                            <i data-lucide="video" class="w-12 h-12 text-primary-600"></i>
-                            <h3 class="mt-6 text-xl font-semibold text-gray-900">Expert-Led Classes</h3>
-                            <p class="mt-2 text-gray-600">High-quality, engaging video content recorded by subject
-                                matter experts.</p>
-                        </div>
-                        <!-- Feature 2 -->
-                        <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-100">
-                            <i data-lucide="bar-chart-3" class="w-12 h-12 text-primary-600"></i>
-                            <h3 class="mt-6 text-xl font-semibold text-gray-900">Track Your Progress</h3>
-                            <p class="mt-2 text-gray-600">A simple dashboard to see your purchased courses and
-                                completion status.</p>
-                        </div>
-                        <!-- Feature 3 -->
-                        <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-100">
-                            <i data-lucide="shield-check" class="w-12 h-12 text-primary-600"></i>
-                            <h3 class="mt-6 text-xl font-semibold text-gray-900">Secure Payments</h3>
-                            <p class="mt-2 text-gray-600">Easy and secure course purchase using our trusted payment
-                                gateway.</p>
-                        </div>
+                    <div class="p-4">
+                        <div class="text-3xl font-bold text-brand-600 mb-1">50+</div>
+                        <div class="text-sm text-slate-500 font-medium">Expert Teachers</div>
+                    </div>
+                    <div class="p-4">
+                        <div class="text-3xl font-bold text-brand-600 mb-1">10k+</div>
+                        <div class="text-sm text-slate-500 font-medium">Active Students</div>
+                    </div>
+                    <div class="p-4">
+                        <div class="text-3xl font-bold text-brand-600 mb-1">4.9</div>
+                        <div class="text-sm text-slate-500 font-medium">Average Rating</div>
                     </div>
                 </div>
             </section>
 
             <!-- Course Marketplace Section -->
-            <section id="courses" class="py-24 bg-white">
+            <section id="courses" class="py-24 relative">
                 <div class="container mx-auto px-6">
-                    <div class="text-center mb-12">
-                        <h2 class="text-3xl md:text-4xl font-bold text-gray-900">Explore Our Courses</h2>
-                        <p class="mt-4 text-lg text-gray-600">Find the perfect course for your grade level.</p>
+                    <div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-4">
+                        <div>
+                            <h2 class="text-3xl md:text-4xl font-bold text-slate-900">Featured Courses</h2>
+                            <p class="mt-2 text-lg text-slate-500">Handpicked curriculum for academic excellence.</p>
+                        </div>
+                        
+                        <!-- Grade Filters -->
+                        <div class="flex flex-wrap gap-2">
+                            <button class="grade-filter-btn px-4 py-2 rounded-full text-sm font-semibold transition-all bg-brand-600 text-white shadow-lg shadow-brand-500/30" data-grade="all">All</button>
+                            <button class="grade-filter-btn px-4 py-2 rounded-full text-sm font-semibold transition-all bg-white text-slate-600 hover:bg-slate-100 border border-slate-200" data-grade="10">Grade 10</button>
+                            <button class="grade-filter-btn px-4 py-2 rounded-full text-sm font-semibold transition-all bg-white text-slate-600 hover:bg-slate-100 border border-slate-200" data-grade="9">Grade 9</button>
+                            <button class="grade-filter-btn px-4 py-2 rounded-full text-sm font-semibold transition-all bg-white text-slate-600 hover:bg-slate-100 border border-slate-200" data-grade="8">Grade 8</button>
+                        </div>
                     </div>
 
-                    <!-- Grade Filter Buttons -->
-                    <div class="flex flex-wrap justify-center gap-2 md:gap-4 mb-12">
-                        <button
-                            class="grade-filter-btn px-5 py-2 rounded-full font-medium text-sm transition-all bg-primary-600 text-white"
-                            data-grade="all">
-                            All Grades
-                        </button>
-                        <button
-                            class="grade-filter-btn px-5 py-2 rounded-full font-medium text-sm transition-all bg-gray-100 text-gray-700 hover:bg-gray-200"
-                            data-grade="10">
-                            Grade 10
-                        </button>
-                        <button
-                            class="grade-filter-btn px-5 py-2 rounded-full font-medium text-sm transition-all bg-gray-100 text-gray-700 hover:bg-gray-200"
-                            data-grade="9">
-                            Grade 9
-                        </button>
-                        <button
-                            class="grade-filter-btn px-5 py-2 rounded-full font-medium text-sm transition-all bg-gray-100 text-gray-700 hover:bg-gray-200"
-                            data-grade="8">
-                            Grade 8
-                        </button>
-                        <button
-                            class="grade-filter-btn px-5 py-2 rounded-full font-medium text-sm transition-all bg-gray-100 text-gray-700 hover:bg-gray-200"
-                            data-grade="7">
-                            Grade 7
-                        </button>
-                        <button
-                            class="grade-filter-btn px-5 py-2 rounded-full font-medium text-sm transition-all bg-gray-100 text-gray-700 hover:bg-gray-200"
-                            data-grade="6">
-                            Grade 6
-                        </button>
-                        <button
-                            class="grade-filter-btn px-5 py-2 rounded-full font-medium text-sm transition-all bg-gray-100 text-gray-700 hover:bg-gray-200"
-                            data-grade="5">
-                            Grade 5
-                        </button>
-                    </div>
-
-                    <!-- Course Card Grid -->
+                    <!-- Course Grid -->
                     <div id="course-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                        <!-- Card 1 (Grade 10) -->
-                        <div class="course-card bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100 flex flex-col"
-                            data-grade="10" data-title="Grade 10 - Mathematics" data-description="Full syllabus for Grade 10 Math, covering Algebra, Geometry, Trigonometry, and Statistics. Includes 4 modules and 60 videos."
-                            data-price="4999" data-subjects="Mathematics" data-videos="60">
-                            <img src="https://placehold.co/600x400/0ea5e9/white?text=Grade+10+Math"
-                                alt="Grade 10 Mathematics" class="w-full h-48 object-cover">
-                            <div class="p-6 flex flex-col flex-grow">
-                                <span
-                                    class="inline-block bg-primary-100 text-primary-700 text-xs font-semibold px-3 py-1 rounded-full mb-3">Grade
-                                    10</span>
-                                <h3 class="text-xl font-bold text-gray-900 mb-2">Grade 10 - Mathematics</h3>
-                                <p class="text-gray-600 text-sm mb-4 line-clamp-2">Full syllabus for Grade 10 Math,
-                                    covering Algebra, Geometry, and more.</p>
-                                <div class="flex items-center text-sm text-gray-500 mb-6">
-                                    <i data-lucide="book-open" class="w-4 h-4 mr-2"></i>
-                                    <span>Mathematics</span>
-                                    <span class="mx-2">|</span>
-                                    <i data-lucide="film" class="w-4 h-4 mr-2"></i>
-                                    <span>60 Videos</span>
+                        
+                        <!-- Card Template -->
+                        <div class="course-card group bg-white rounded-2xl shadow-card hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 border border-slate-100 overflow-hidden flex flex-col"
+                             data-grade="10" data-title="Grade 10 - Mathematics Mastery" data-description="Full syllabus for Grade 10 Math, covering Algebra, Geometry, Trigonometry, and Statistics with real-world examples." data-price="4999" data-subjects="Mathematics" data-videos="60">
+                            <div class="relative h-48 overflow-hidden">
+                                <img src="https://placehold.co/600x400/1e40af/white?text=Grade+10+Math" alt="Course" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
+                                <div class="absolute top-3 right-3 bg-white/90 backdrop-blur-sm px-2 py-1 rounded-md text-xs font-bold text-brand-700 shadow-sm">
+                                    Best Seller
                                 </div>
-                                <div class="mt-auto flex justify-between items-center">
-                                    <span class="text-2xl font-bold text-primary-600">₹4,999</span>
-                                    <button
-                                        class="buy-now-btn px-5 py-2.5 bg-primary-600 text-white rounded-lg font-medium hover:bg-primary-700 transition-colors">
-                                        Buy Now
+                            </div>
+                            <div class="p-6 flex flex-col flex-grow">
+                                <div class="flex items-center justify-between mb-3">
+                                    <span class="text-xs font-bold text-brand-600 bg-brand-50 px-2 py-1 rounded uppercase tracking-wider">Grade 10</span>
+                                    <div class="flex text-accent-500 text-xs">
+                                        <i data-lucide="star" class="w-3 h-3 fill-current"></i>
+                                        <i data-lucide="star" class="w-3 h-3 fill-current"></i>
+                                        <i data-lucide="star" class="w-3 h-3 fill-current"></i>
+                                        <i data-lucide="star" class="w-3 h-3 fill-current"></i>
+                                        <i data-lucide="star-half" class="w-3 h-3 fill-current"></i>
+                                    </div>
+                                </div>
+                                <h3 class="text-xl font-bold text-slate-900 mb-2 group-hover:text-brand-600 transition-colors">Mathematics Mastery</h3>
+                                <p class="text-slate-500 text-sm mb-4 line-clamp-2">Comprehensive coverage of Algebra, Geometry, and Trigonometry.</p>
+                                
+                                <div class="mt-auto pt-4 border-t border-slate-100 flex justify-between items-center">
+                                    <div>
+                                        <span class="text-2xl font-bold text-slate-900">₹4,999</span>
+                                        <span class="text-sm text-slate-400 line-through ml-1">₹8,000</span>
+                                    </div>
+                                    <button class="buy-now-btn w-10 h-10 rounded-full bg-brand-50 text-brand-600 flex items-center justify-center hover:bg-brand-600 hover:text-white transition-all">
+                                        <i data-lucide="arrow-right" class="w-5 h-5"></i>
                                     </button>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Card 2 (Grade 9) -->
-                        <div class="course-card bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100 flex flex-col"
-                            data-grade="9" data-title="Grade 9 - Science" data-description="Complete Physics, Chemistry, and Biology for Grade 9. Master concepts with 4 modules and 55 videos."
-                            data-price="4499" data-subjects="Science" data-videos="55">
-                            <img src="https://placehold.co/600x400/0369a1/white?text=Grade+9+Science"
-                                alt="Grade 9 Science" class="w-full h-48 object-cover">
-                            <div class="p-6 flex flex-col flex-grow">
-                                <span
-                                    class="inline-block bg-primary-100 text-primary-700 text-xs font-semibold px-3 py-1 rounded-full mb-3">Grade
-                                    9</span>
-                                <h3 class="text-xl font-bold text-gray-900 mb-2">Grade 9 - Science</h3>
-                                <p class="text-gray-600 text-sm mb-4 line-clamp-2">Complete Physics, Chemistry, and
-                                    Biology for Grade 9.</p>
-                                <div class="flex items-center text-sm text-gray-500 mb-6">
-                                    <i data-lucide="flask-conical" class="w-4 h-4 mr-2"></i>
-                                    <span>Science</span>
-                                    <span class="mx-2">|</span>
-                                    <i data-lucide="film" class="w-4 h-4 mr-2"></i>
-                                    <span>55 Videos</span>
+                        <!-- Card 2 -->
+                        <div class="course-card group bg-white rounded-2xl shadow-card hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 border border-slate-100 overflow-hidden flex flex-col"
+                             data-grade="9" data-title="Grade 9 - Science Explorer" data-description="Physics, Chemistry, and Biology simplified. Interactive experiments and visualizations." data-price="4499" data-subjects="Science" data-videos="55">
+                            <div class="relative h-48 overflow-hidden">
+                                <img src="https://placehold.co/600x400/0369a1/white?text=Grade+9+Science" alt="Course" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
+                                <div class="absolute top-3 right-3 bg-accent-500 text-white px-2 py-1 rounded-md text-xs font-bold shadow-sm">
+                                    New
                                 </div>
-                                <div class="mt-auto flex justify-between items-center">
-                                    <span class="text-2xl font-bold text-primary-600">₹4,499</span>
-                                    <button
-                                        class="buy-now-btn px-5 py-2.5 bg-primary-600 text-white rounded-lg font-medium hover:bg-primary-700 transition-colors">
-                                        Buy Now
+                            </div>
+                            <div class="p-6 flex flex-col flex-grow">
+                                <div class="flex items-center justify-between mb-3">
+                                    <span class="text-xs font-bold text-brand-600 bg-brand-50 px-2 py-1 rounded uppercase tracking-wider">Grade 9</span>
+                                    <div class="flex text-accent-500 text-xs">
+                                        <i data-lucide="star" class="w-3 h-3 fill-current"></i>
+                                        <i data-lucide="star" class="w-3 h-3 fill-current"></i>
+                                        <i data-lucide="star" class="w-3 h-3 fill-current"></i>
+                                        <i data-lucide="star" class="w-3 h-3 fill-current"></i>
+                                        <i data-lucide="star" class="w-3 h-3 fill-current"></i>
+                                    </div>
+                                </div>
+                                <h3 class="text-xl font-bold text-slate-900 mb-2 group-hover:text-brand-600 transition-colors">Science Explorer</h3>
+                                <p class="text-slate-500 text-sm mb-4 line-clamp-2">Physics, Chemistry, and Biology simplified with interactive experiments.</p>
+                                
+                                <div class="mt-auto pt-4 border-t border-slate-100 flex justify-between items-center">
+                                    <div>
+                                        <span class="text-2xl font-bold text-slate-900">₹4,499</span>
+                                    </div>
+                                    <button class="buy-now-btn w-10 h-10 rounded-full bg-brand-50 text-brand-600 flex items-center justify-center hover:bg-brand-600 hover:text-white transition-all">
+                                        <i data-lucide="arrow-right" class="w-5 h-5"></i>
                                     </button>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Card 3 (Grade 10) -->
-                        <div class="course-card bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100 flex flex-col"
-                            data-grade="10" data-title="Grade 10 - Social Science" data-description="In-depth coverage of History, Geography, Civics, and Economics for Grade 10. Prepare for your boards with 4 modules and 50 videos."
-                            data-price="3999" data-subjects="Social Science" data-videos="50">
-                            <img src="https://placehold.co/600x400/075985/white?text=Grade+10+Social+Sc."
-                                alt="Grade 10 Social Science" class="w-full h-48 object-cover">
+                        <!-- Card 3 -->
+                        <div class="course-card group bg-white rounded-2xl shadow-card hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 border border-slate-100 overflow-hidden flex flex-col"
+                             data-grade="8" data-title="Grade 8 - English Excellence" data-description="Master grammar, creative writing, and literature. Boost your confidence in English." data-price="2999" data-subjects="English" data-videos="40">
+                            <div class="relative h-48 overflow-hidden">
+                                <img src="https://placehold.co/600x400/0f766e/white?text=Grade+8+English" alt="Course" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
+                            </div>
                             <div class="p-6 flex flex-col flex-grow">
-                                <span
-                                    class="inline-block bg-primary-100 text-primary-700 text-xs font-semibold px-3 py-1 rounded-full mb-3">Grade
-                                    10</span>
-                                <h3 class="text-xl font-bold text-gray-900 mb-2">Grade 10 - Social Science</h3>
-                                <p class="text-gray-600 text-sm mb-4 line-clamp-2">In-depth coverage of History,
-                                    Geography, Civics, and Economics.</p>
-                                <div class="flex items-center text-sm text-gray-500 mb-6">
-                                    <i data-lucide="globe-2" class="w-4 h-4 mr-2"></i>
-                                    <span>Social Science</span>
-                                    <span class="mx-2">|</span>
-                                    <i data-lucide="film" class="w-4 h-4 mr-2"></i>
-                                    <span>50 Videos</span>
+                                <div class="flex items-center justify-between mb-3">
+                                    <span class="text-xs font-bold text-brand-600 bg-brand-50 px-2 py-1 rounded uppercase tracking-wider">Grade 8</span>
+                                    <div class="flex text-accent-500 text-xs">
+                                        <i data-lucide="star" class="w-3 h-3 fill-current"></i>
+                                        <i data-lucide="star" class="w-3 h-3 fill-current"></i>
+                                        <i data-lucide="star" class="w-3 h-3 fill-current"></i>
+                                        <i data-lucide="star" class="w-3 h-3 fill-current"></i>
+                                        <i data-lucide="star" class="w-3 h-3 text-slate-300"></i>
+                                    </div>
                                 </div>
-                                <div class="mt-auto flex justify-between items-center">
-                                    <span class="text-2xl font-bold text-primary-600">₹3,999</span>
-                                    <button
-                                        class="buy-now-btn px-5 py-2.5 bg-primary-600 text-white rounded-lg font-medium hover:bg-primary-700 transition-colors">
-                                        Buy Now
+                                <h3 class="text-xl font-bold text-slate-900 mb-2 group-hover:text-brand-600 transition-colors">English Excellence</h3>
+                                <p class="text-slate-500 text-sm mb-4 line-clamp-2">Master grammar, creative writing, and literature.</p>
+                                
+                                <div class="mt-auto pt-4 border-t border-slate-100 flex justify-between items-center">
+                                    <div>
+                                        <span class="text-2xl font-bold text-slate-900">₹2,999</span>
+                                    </div>
+                                    <button class="buy-now-btn w-10 h-10 rounded-full bg-brand-50 text-brand-600 flex items-center justify-center hover:bg-brand-600 hover:text-white transition-all">
+                                        <i data-lucide="arrow-right" class="w-5 h-5"></i>
                                     </button>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Card 4 (Grade 8) -->
-                        <div class="course-card bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100 flex flex-col"
-                            data-grade="8" data-title="Grade 8 - English" data-description="Improve your grammar, comprehension, and writing skills with our comprehensive English course. Includes 4 modules and 40 videos."
-                            data-price="2999" data-subjects="English" data-videos="40">
-                            <img src="https://placehold.co/600x400/0ea5e9/white?text=Grade+8+English"
-                                alt="Grade 8 English" class="w-full h-48 object-cover">
-                            <div class="p-6 flex flex-col flex-grow">
-                                <span
-                                    class="inline-block bg-primary-100 text-primary-700 text-xs font-semibold px-3 py-1 rounded-full mb-3">Grade
-                                    8</span>
-                                <h3 class="text-xl font-bold text-gray-900 mb-2">Grade 8 - English</h3>
-                                <p class="text-gray-600 text-sm mb-4 line-clamp-2">Improve your grammar, comprehension,
-                                    and writing skills.</p>
-                                <div class="flex items-center text-sm text-gray-500 mb-6">
-                                    <i data-lucide="book-open" class="w-4 h-4 mr-2"></i>
-                                    <span>English</span>
-                                    <span class="mx-2">|</span>
-                                    <i data-lucide="film" class="w-4 h-4 mr-2"></i>
-                                    <span>40 Videos</span>
-                                </div>
-                                <div class="mt-auto flex justify-between items-center">
-                                    <span class="text-2xl font-bold text-primary-600">₹2,999</span>
-                                    <button
-                                        class="buy-now-btn px-5 py-2.5 bg-primary-600 text-white rounded-lg font-medium hover:bg-primary-700 transition-colors">
-                                        Buy Now
-                                    </button>
-                                </div>
+                        <!-- Card 4 -->
+                        <div class="course-card group bg-white rounded-2xl shadow-card hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 border border-slate-100 overflow-hidden flex flex-col"
+                             data-grade="10" data-title="Grade 10 - Social Science" data-description="History, Civics, Geography, and Economics. Prepare for boards effectively." data-price="3999" data-subjects="Social Science" data-videos="50">
+                            <div class="relative h-48 overflow-hidden">
+                                <img src="https://placehold.co/600x400/b45309/white?text=Grade+10+Social+Sc" alt="Course" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
                             </div>
-                        </div>
-
-                        <!-- Card 5 (Grade 7) -->
-                        <div class="course-card bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100 flex flex-col"
-                            data-grade="7" data-title="Grade 7 - Mathematics" data-description="Build a strong foundation in Grade 7 Math. Covers all essential topics in 4 modules and 45 videos."
-                            data-price="3499" data-subjects="Mathematics" data-videos="45">
-                            <img src="https://placehold.co/600x400/0369a1/white?text=Grade+7+Math"
-                                alt="Grade 7 Mathematics" class="w-full h-48 object-cover">
                             <div class="p-6 flex flex-col flex-grow">
-                                <span
-                                    class="inline-block bg-primary-100 text-primary-700 text-xs font-semibold px-3 py-1 rounded-full mb-3">Grade
-                                    7</span>
-                                <h3 class="text-xl font-bold text-gray-900 mb-2">Grade 7 - Mathematics</h3>
-                                <p class="text-gray-600 text-sm mb-4 line-clamp-2">Build a strong foundation in Grade 7
-                                    Math. Covers all essential topics.</p>
-                                <div class="flex items-center text-sm text-gray-500 mb-6">
-                                    <i data-lucide="book-open" class="w-4 h-4 mr-2"></i>
-                                    <span>Mathematics</span>
-                                    <span class="mx-2">|</span>
-                                    <!-- FIXED: This line was corrupted by a bad diff merge. -->
-                                    <i data-lucide="film" class="w-4 h-4 mr-2"></i>
-                                    <!-- FIXED: Corrected "4Methods" to "45 Videos" -->
-                                    <span>45 Videos</span>
+                                <div class="flex items-center justify-between mb-3">
+                                    <span class="text-xs font-bold text-brand-600 bg-brand-50 px-2 py-1 rounded uppercase tracking-wider">Grade 10</span>
+                                    <div class="flex text-accent-500 text-xs">
+                                        <i data-lucide="star" class="w-3 h-3 fill-current"></i>
+                                        <i data-lucide="star" class="w-3 h-3 fill-current"></i>
+                                        <i data-lucide="star" class="w-3 h-3 fill-current"></i>
+                                        <i data-lucide="star" class="w-3 h-3 fill-current"></i>
+                                        <i data-lucide="star-half" class="w-3 h-3 fill-current"></i>
+                                    </div>
                                 </div>
-                                <div class="mt-auto flex justify-between items-center">
-                                    <span class="text-2xl font-bold text-primary-600">₹3,499</span>
-                                    <button
-                                        class="buy-now-btn px-5 py-2.5 bg-primary-600 text-white rounded-lg font-medium hover:bg-primary-700 transition-colors">
-                                        Buy Now
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Card 6 (Grade 6) -->
-                        <div class="course-card bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100 flex flex-col"
-                            data-grade="6" data-title="Grade 6 - Science" data-description="Explore the wonders of science! A fun and interactive course for Grade 6 students. Includes 4 modules and 40 videos."
-                            data-price="3299" data-subjects="Science" data-videos="40">
-                            <img src="https://placehold.co/600x400/075985/white?text=Grade+6+Science"
-                                alt="Grade 6 Science" class="w-full h-48 object-cover">
-                            <div class="p-6 flex flex-col flex-grow">
-                                <span
-                                    class="inline-block bg-primary-100 text-primary-700 text-xs font-semibold px-3 py-1 rounded-full mb-3">Grade
-                                    6</span>
-                                <h3 class="text-xl font-bold text-gray-900 mb-2">Grade 6 - Science</h3>
-                                <p class="text-gray-600 text-sm mb-4 line-clamp-2">Explore the wonders of science! A fun
-                                    and interactive course for Grade 6 students.</p>
-                                <div class="flex items-center text-sm text-gray-500 mb-6">
-                                    <i data-lucide="flask-conical" class="w-4 h-4 mr-2"></i>
-                                    <span>Science</span>
-                                    <span class="mx-2">|</span>
-                                    <i data-lucide="film" class="w-4 h-4 mr-2"></i>
-                                    <span>40 Videos</span>
-                                </div>
-                                <div class="mt-auto flex justify-between items-center">
-                                    <span class="text-2xl font-bold text-primary-600">₹3,299</span>
-                                    <button
-                                        class="buy-now-btn px-5 py-2.5 bg-primary-600 text-white rounded-lg font-medium hover:bg-primary-700 transition-colors">
-                                        Buy Now
+                                <h3 class="text-xl font-bold text-slate-900 mb-2 group-hover:text-brand-600 transition-colors">Social Science</h3>
+                                <p class="text-slate-500 text-sm mb-4 line-clamp-2">History, Civics, Geography, and Economics.</p>
+                                
+                                <div class="mt-auto pt-4 border-t border-slate-100 flex justify-between items-center">
+                                    <div>
+                                        <span class="text-2xl font-bold text-slate-900">₹3,999</span>
+                                    </div>
+                                    <button class="buy-now-btn w-10 h-10 rounded-full bg-brand-50 text-brand-600 flex items-center justify-center hover:bg-brand-600 hover:text-white transition-all">
+                                        <i data-lucide="arrow-right" class="w-5 h-5"></i>
                                     </button>
                                 </div>
                             </div>
@@ -384,288 +436,236 @@
                 </div>
             </section>
 
-            <!-- Footer -->
-            <footer class="bg-gray-900 text-gray-400 py-12">
+            <!-- Features Section (Redesigned) -->
+            <section id="features" class="py-24 bg-slate-50 border-t border-slate-200">
                 <div class="container mx-auto px-6">
-                    <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-                        <!-- Logo & About -->
-                        <div>
-                            <h3 class="text-xl font-bold text-white mb-4">Vidyantrix</h3>
-                            <p class="text-sm">Online learning platform for Grades 5-10. Empowering students to
-                                achieve their academic goals.</p>
+                    <div class="text-center mb-16">
+                        <h2 class="text-3xl md:text-4xl font-bold text-slate-900">Why Learners Trust Us</h2>
+                        <p class="mt-4 text-lg text-slate-500">Built for student success, powered by technology.</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <div class="bg-white p-8 rounded-2xl shadow-lg border border-slate-100 hover:border-brand-200 transition-colors">
+                            <div class="w-14 h-14 bg-brand-100 rounded-xl flex items-center justify-center text-brand-600 mb-6">
+                                <i data-lucide="video" class="w-7 h-7"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-slate-900 mb-3">HD Video Lessons</h3>
+                            <p class="text-slate-500">Crystal clear conceptual videos recorded by India's top educators. Watch anytime, anywhere.</p>
                         </div>
-                        <!-- Quick Links -->
-                        <div>
-                            <h4 class="text-lg font-semibold text-white mb-4">Quick Links</h4>
-                            <ul class="space-y-2 text-sm">
-                                <li><a href="#hero" class="hover:text-white">Home</a></li>
-                                <li><a href="#courses" class="hover:text-white">Courses</a></li>
-                                <li><a href="#features" class="hover:text-white">Features</a></li>
-                                <li><a href="#" class="hover:text-white">Sign In</a></li>
-                            </ul>
+                        <div class="bg-white p-8 rounded-2xl shadow-lg border border-slate-100 hover:border-brand-200 transition-colors">
+                            <div class="w-14 h-14 bg-purple-100 rounded-xl flex items-center justify-center text-purple-600 mb-6">
+                                <i data-lucide="bar-chart-3" class="w-7 h-7"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-slate-900 mb-3">Analytics Dashboard</h3>
+                            <p class="text-slate-500">Track your strengths and weaknesses with detailed reports and performance graphs.</p>
                         </div>
-                        <!-- Legal -->
-                        <div>
-                            <h4 class="text-lg font-semibold text-white mb-4">Legal</h4>
-                            <ul class="space-y-2 text-sm">
-                                <li><a href="#" class="hover:text-white">Privacy Policy</a></li>
-                                <li><a href="#" class="hover:text-white">Terms of Service</a></li>
-                            </ul>
-                        </div>
-                        <!-- Contact -->
-                        <div>
-                            <h4 class="text-lg font-semibold text-white mb-4">Contact Us</h4>
-                            <ul class="space-y-2 text-sm">
-                                <li><a href="mailto:support@vidyantrix.com"
-                                        class="hover:text-white">support@vidyantrix.com</a></li>
-                            </ul>
+                        <div class="bg-white p-8 rounded-2xl shadow-lg border border-slate-100 hover:border-brand-200 transition-colors">
+                            <div class="w-14 h-14 bg-green-100 rounded-xl flex items-center justify-center text-green-600 mb-6">
+                                <i data-lucide="shield-check" class="w-7 h-7"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-slate-900 mb-3">Safe & Secure</h3>
+                            <p class="text-slate-500">Your data is encrypted. Learning environment is moderated for student safety.</p>
                         </div>
                     </div>
-                    <div class="mt-8 pt-8 border-t border-gray-800 text-center text-sm">
-                        &copy; 2024 Vidyantrix. All rights reserved.
+                </div>
+            </section>
+
+            <!-- Footer -->
+            <footer class="bg-brand-950 text-slate-400 py-16 border-t border-brand-900">
+                <div class="container mx-auto px-6">
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
+                        <!-- Brand -->
+                        <div>
+                            <h3 class="text-2xl font-bold text-white mb-6">Vidyantrix</h3>
+                            <p class="text-sm leading-relaxed mb-6">Empowering the next generation of thinkers and leaders through accessible, high-quality education.</p>
+                            <div class="flex space-x-4">
+                                <a href="#" class="text-slate-400 hover:text-white transition-colors"><i data-lucide="facebook" class="w-5 h-5"></i></a>
+                                <a href="#" class="text-slate-400 hover:text-white transition-colors"><i data-lucide="twitter" class="w-5 h-5"></i></a>
+                                <a href="#" class="text-slate-400 hover:text-white transition-colors"><i data-lucide="instagram" class="w-5 h-5"></i></a>
+                                <a href="#" class="text-slate-400 hover:text-white transition-colors"><i data-lucide="linkedin" class="w-5 h-5"></i></a>
+                            </div>
+                        </div>
+                        <!-- Links -->
+                        <div>
+                            <h4 class="text-lg font-semibold text-white mb-6">Platform</h4>
+                            <ul class="space-y-3 text-sm">
+                                <li><a href="#" class="hover:text-brand-400 transition-colors">Browse Courses</a></li>
+                                <li><a href="#" class="hover:text-brand-400 transition-colors">Live Classes</a></li>
+                                <li><a href="#" class="hover:text-brand-400 transition-colors">Success Stories</a></li>
+                                <li><a href="#" class="hover:text-brand-400 transition-colors">Pricing</a></li>
+                            </ul>
+                        </div>
+                        <!-- Company -->
+                        <div>
+                            <h4 class="text-lg font-semibold text-white mb-6">Company</h4>
+                            <ul class="space-y-3 text-sm">
+                                <li><a href="#" class="hover:text-brand-400 transition-colors">About Us</a></li>
+                                <li><a href="#" class="hover:text-brand-400 transition-colors">Careers</a></li>
+                                <li><a href="#" class="hover:text-brand-400 transition-colors">Blog</a></li>
+                                <li><a href="#" class="hover:text-brand-400 transition-colors">Contact</a></li>
+                            </ul>
+                        </div>
+                        <!-- Newsletter -->
+                        <div>
+                            <h4 class="text-lg font-semibold text-white mb-6">Stay Updated</h4>
+                            <p class="text-sm mb-4">Subscribe to get the latest course updates.</p>
+                            <div class="flex">
+                                <input type="email" placeholder="Email Address" class="bg-brand-900 border border-brand-800 text-white text-sm rounded-l-lg px-4 py-2.5 outline-none focus:border-brand-600 w-full">
+                                <button class="bg-brand-600 hover:bg-brand-500 text-white px-4 rounded-r-lg font-medium transition-colors">
+                                    <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-16 pt-8 border-t border-brand-900 text-center text-sm flex flex-col md:flex-row justify-between items-center">
+                        <p>&copy; 2024 Vidyantrix. All rights reserved.</p>
+                        <div class="flex space-x-6 mt-4 md:mt-0">
+                            <a href="#" class="hover:text-white">Privacy Policy</a>
+                            <a href="#" class="hover:text-white">Terms of Service</a>
+                            <a href="#" class="hover:text-white">Cookie Policy</a>
+                        </div>
                     </div>
                 </div>
             </footer>
 
         </div>
-        <!-- End Landing Page Section -->
+        <!-- End Landing Page -->
 
 
-        <!-- Course Preview Modal (Hidden by default) -->
-        <div id="course-preview-modal" class="hidden fixed inset-0 bg-gray-900 bg-opacity-75 z-40 p-6">
+        <!-- Course Preview Modal -->
+        <div id="course-preview-modal" class="hidden fixed inset-0 bg-slate-900/80 backdrop-blur-sm z-[100] flex items-center justify-center p-4 opacity-0 transition-opacity duration-300">
             <!-- Modal Content -->
-            <div
-                class="relative bg-white w-full max-w-2xl max-h-full overflow-y-auto rounded-xl shadow-2xl mx-auto mt-10">
+            <div class="relative bg-white w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-2xl shadow-2xl scale-95 transition-transform duration-300 transform" id="modal-panel">
                 <!-- Modal Header -->
-                <div class="flex justify-between items-center p-5 border-b">
-                    <h3 id="modal-title" class="text-2xl font-bold text-gray-900">
-                        <!-- Dynamic Title -->
-                    </h3>
-                    <button id="modal-close-btn"
-                        class="text-gray-400 hover:bg-gray-200 hover:text-gray-900 rounded-lg p-1.5">
-                        <i data-lucide="x" class="w-6 h-6"></i>
-                        <span class="sr-only">Close modal</span>
+                <div class="flex justify-between items-start p-6 border-b border-slate-100">
+                    <div>
+                        <h3 id="modal-title" class="text-2xl font-bold text-slate-900 pr-4">Course Title</h3>
+                        <span class="text-xs font-bold text-brand-600 bg-brand-50 px-2 py-1 rounded uppercase tracking-wider mt-1 inline-block">Preview</span>
+                    </div>
+                    <button id="modal-close-btn" class="text-slate-400 hover:bg-slate-100 hover:text-slate-900 rounded-full p-2 transition-colors">
+                        <i data-lucide="x" class="w-5 h-5"></i>
                     </button>
                 </div>
                 <!-- Modal Body -->
-                <div class="p-6 space-y-4">
-                    <img id="modal-image" src="https://placehold.co/600x300/0ea5e9/white?text=Course+Preview" alt="Course Image"
-                        class="w-full h-64 object-cover rounded-lg">
-                    <p id="modal-description" class="text-gray-600">
-                        <!-- Dynamic Description -->
-                    </p>
-                    <div class="flex flex-wrap gap-4 text-sm">
-                        <div class="flex items-center text-gray-700">
-                            <i data-lucide="book-open" class="w-4 h-4 mr-2 text-primary-600"></i>
-                            <strong class="mr-1">Subject:</strong>
-                            <span id="modal-subjects"><!-- Dynamic Subject --></span>
+                <div class="p-6 space-y-6">
+                    <img id="modal-image" src="" alt="Course Image" class="w-full h-64 object-cover rounded-xl shadow-md">
+                    <div>
+                        <h4 class="font-semibold text-slate-900 mb-2">Description</h4>
+                        <p id="modal-description" class="text-slate-600 leading-relaxed">Course Description</p>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="bg-slate-50 p-4 rounded-xl">
+                            <div class="flex items-center text-slate-500 text-xs uppercase font-bold mb-1">
+                                <i data-lucide="book-open" class="w-3 h-3 mr-1"></i> Subject
+                            </div>
+                            <div class="font-semibold text-slate-900" id="modal-subjects">Subject</div>
                         </div>
-                        <div class="flex items-center text-gray-700">
-                            <i data-lucide="film" class="w-4 h-4 mr-2 text-primary-600"></i>
-                            <strong class="mr-1">Videos:</strong>
-                            <span id="modal-videos"><!-- Dynamic Video Count --></span>
+                        <div class="bg-slate-50 p-4 rounded-xl">
+                            <div class="flex items-center text-slate-500 text-xs uppercase font-bold mb-1">
+                                <i data-lucide="film" class="w-3 h-3 mr-1"></i> Content
+                            </div>
+                            <div class="font-semibold text-slate-900" id="modal-videos">0 Videos</div>
                         </div>
                     </div>
                 </div>
                 <!-- Modal Footer -->
-                <div class="flex items-center justify-between p-6 border-t bg-gray-50 rounded-b-xl">
-                    <!-- FIXED: Changed class_name="..." to class="..." -->
-                    <span id="modal-price" class="text-3xl font-bold text-primary-600">
-                        <!-- Dynamic Price -->
-                    </span>
-                    <button id="start-course-btn"
-                        class="px-6 py-3 bg-primary-600 text-white rounded-lg font-medium text-lg hover:bg-primary-700 transition-all shadow-lg hover:shadow-xl">
-                        Start Course (Free)
+                <div class="flex items-center justify-between p-6 border-t border-slate-100 bg-slate-50 rounded-b-2xl">
+                    <div>
+                        <span class="text-xs text-slate-500 block">Total Price</span>
+                        <span id="modal-price" class="text-3xl font-bold text-slate-900">₹0</span>
+                    </div>
+                    <button id="start-course-btn" class="px-8 py-3 bg-brand-600 text-white rounded-xl font-semibold hover:bg-brand-700 transition-all shadow-lg hover:shadow-brand-500/30 transform hover:-translate-y-0.5">
+                        Start Learning Now
                     </button>
                 </div>
             </div>
         </div>
 
 
-        <!-- Course Player Section (Hidden by default) -->
-        <div id="course-player-page" class="hidden min-h-screen bg-gray-100">
-            <!-- Course Player Header -->
-            <header class="bg-white shadow-md z-20 sticky top-0">
-                <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-                    <!-- Logo / Course Title -->
-                    <a href="#" class="text-2xl font-bold text-primary-700">Vidyantrix</a>
-                    <h2 id="player-course-title" class="text-xl font-semibold text-gray-800 hidden md:block">
+        <!-- Course Player Section -->
+        <div id="course-player-page" class="hidden min-h-screen bg-slate-100">
+            <header class="bg-white shadow-sm z-20 sticky top-0 border-b border-slate-200">
+                <div class="container mx-auto px-6 py-3 flex justify-between items-center">
+                    <a href="#" class="text-xl font-extrabold text-slate-900 flex items-center gap-2">
+                        <div class="w-6 h-6 bg-brand-600 rounded flex items-center justify-center text-white text-xs">V</div>
+                        Vidyantrix
+                    </a>
+                    <h2 id="player-course-title" class="text-sm font-semibold text-slate-600 hidden md:block border-l border-slate-200 pl-4 ml-4">
                         <!-- Dynamic Title -->
                     </h2>
-                    <a href="#" id="exit-player-btn"
-                        class="text-sm font-medium text-gray-600 hover:text-primary-600 flex items-center">
-                        <i data-lucide="log-out" class="w-4 h-4 mr-2"></i>
-                        Exit Course
+                    <a href="#" id="exit-player-btn" class="text-xs font-bold uppercase tracking-wide text-slate-500 hover:text-brand-600 flex items-center border border-slate-200 px-3 py-1.5 rounded-md hover:bg-slate-50 transition-colors">
+                        <i data-lucide="log-out" class="w-3 h-3 mr-2"></i> Exit
                     </a>
                 </div>
             </header>
 
-            <!-- Player & Syllabus Container -->
-            <div class="container mx-auto p-6 lg:p-10">
-                <h2 id="mobile-player-course-title" class="text-2xl font-bold text-gray-900 mb-6 md:hidden">
-                    <!-- Dynamic Title (Mobile) -->
-                </h2>
-                <!-- Player and Syllabus Grid -->
-                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                    <!-- Main Video Player (Left Column) -->
-                    <div class="lg:col-span-2 rounded-lg shadow-lg overflow-hidden relative">
-                        <!-- REMOVED: The plyr-overlay div was removed as part of the fix. -->
-                        <!-- <div id="plyr-overlay" class="plyr-overlay"></div> -->
-                        
-                        <!-- Set a new, working default video (Big Buck Bunny) -->
-                        <div id="video-player" data-plyr-provider="youtube" data-plyr-embed-id="_x-TFNa0-U"></div>
+            <div class="container mx-auto p-4 lg:p-8">
+                <h2 id="mobile-player-course-title" class="text-xl font-bold text-slate-900 mb-4 md:hidden"></h2>
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <!-- Main Video Player -->
+                    <div class="lg:col-span-2">
+                        <!-- Added ID 'video-wrapper' for safe DOM resetting -->
+                        <div id="video-wrapper" class="bg-black rounded-xl shadow-2xl overflow-hidden border border-slate-800 aspect-video">
+                            <div id="video-player" class="plyr__video-embed">
+                                <iframe
+                                    src="https://www.youtube.com/embed/bTqVqk7FSmY?origin=https://plyr.io&amp;iv_load_policy=3&amp;modestbranding=1&amp;playsinline=1&amp;showinfo=0&amp;rel=0&amp;enablejsapi=1"
+                                    allowfullscreen
+                                    allowtransparency
+                                    allow="autoplay"
+                                ></iframe>
+                            </div>
+                        </div>
+                        <div class="mt-4 bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                            <h1 class="text-xl font-bold text-slate-900 mb-2" id="current-video-title">1.1.1 Welcome to the Course</h1>
+                            <p class="text-slate-500 text-sm">Watch this video to understand the course structure and learning outcomes.</p>
+                        </div>
                     </div>
 
-                    <!-- Syllabus / Modules (Right Column) -->
+                    <!-- Syllabus -->
                     <div class="lg:col-span-1">
-                        <div class="bg-white p-6 rounded-lg shadow-lg">
-                            <h3 class="text-xl font-bold text-gray-900 mb-2">Course Content</h3>
-                            <p id="current-video-title" class="text-sm text-primary-600 font-medium mb-4">
-                                1.1.1 Welcome to the Course
-                            </p>
+                        <div class="bg-white rounded-xl shadow-lg border border-slate-200 overflow-hidden flex flex-col h-[80vh] lg:h-auto sticky top-20">
+                            <div class="p-4 border-b border-slate-100 bg-slate-50">
+                                <h3 class="font-bold text-slate-900">Course Content</h3>
+                                <div class="w-full bg-slate-200 rounded-full h-1.5 mt-2">
+                                    <!-- FIXED: Changed initial progress from 15% to 0% -->
+                                    <div class="bg-brand-500 h-1.5 rounded-full" style="width: 0%"></div>
+                                </div>
+                                <p class="text-xs text-slate-500 mt-1">0% Completed</p>
+                            </div>
                             
-                            <!-- Scrollable Syllabus -->
-                            <div id="syllabus-container" class="space-y-3 max-h-[70vh] overflow-y-auto pr-2">
+                            <div id="syllabus-container" class="overflow-y-auto flex-1 p-2 space-y-2">
                                 <!-- Module 1 -->
-                                <div class="bg-gray-50 rounded-lg border border-gray-200">
-                                    <button
-                                        class="module-toggle-btn w-full p-4 flex justify-between items-center text-left">
-                                        <span class="font-semibold text-gray-800">Module 1: Introduction</span>
-                                        <i data-lucide="chevron-down"
-                                            class="w-5 h-5 text-gray-500 transition-transform duration-200"></i>
+                                <div class="border border-slate-200 rounded-lg overflow-hidden">
+                                    <button class="module-toggle-btn w-full p-3 flex justify-between items-center text-left bg-slate-50 hover:bg-slate-100 transition-colors">
+                                        <span class="font-semibold text-sm text-slate-800">Module 1: Introduction</span>
+                                        <i data-lucide="chevron-down" class="w-4 h-4 text-slate-400"></i>
                                     </button>
-                                    <div class="chapter-list hidden p-2 space-y-2">
+                                    <div class="chapter-list hidden bg-white">
                                         <!-- Chapter 1.1 -->
-                                        <div class="bg-white rounded-md border border-gray-200">
-                                            <button
-                                                class="chapter-toggle-btn w-full p-2 text-sm font-medium text-gray-700 hover:bg-gray-50 flex justify-between items-center">
+                                        <div class="border-t border-slate-100">
+                                            <button class="chapter-toggle-btn w-full p-2 pl-4 text-sm font-medium text-slate-600 hover:text-brand-600 hover:bg-slate-50 flex justify-between items-center">
                                                 <span>Chapter 1.1: Welcome</span>
-                                                <i data-lucide="chevron-down"
-                                                    class="w-4 h-4 transition-transform duration-200"></i>
+                                                <i data-lucide="chevron-down" class="w-3 h-3 text-slate-300"></i>
                                             </button>
-                                            <div class="video-list hidden pl-3 pt-2 pb-1 space-y-1 border-l-2 border-primary-200 ml-3">
-                                                <!-- Replaced video IDs with embeddable ones -->
-                                                <a href="#" class="video-link block p-2 rounded-md hover:bg-primary-50 text-gray-600 hover:text-primary-600 text-sm" data-title="1.1.1 Welcome to the Course" data-video-id="_x-TFNa0-U">1.1.1 Welcome to the Course</a>
-                                                <!-- FIXED: Replaced invalid 'G0-9-0-0-a' with a valid ID -->
-                                                <a href="#" class="video-link block p-2 rounded-md hover:bg-primary-50 text-gray-600 hover:text-primary-600 text-sm" data-title="1.1.2 How to Use This Platform" data-video-id="aqz-KE-bpKQ">1.1.2 How to Use This Platform</a>
+                                            <div class="video-list hidden pl-6 pr-2 pb-2 space-y-1">
+                                                <a href="#" class="video-link block p-2 rounded-md bg-brand-50 text-brand-700 text-xs font-medium flex items-center gap-2" data-title="1.1.1 Welcome" data-video-id="bTqVqk7FSmY">
+                                                    <i data-lucide="play-circle" class="w-3 h-3"></i> 1.1.1 Welcome
+                                                </a>
+                                                <a href="#" class="video-link block p-2 rounded-md hover:bg-slate-50 text-slate-600 text-xs font-medium flex items-center gap-2" data-title="1.1.2 Platform Tour" data-video-id="YE7VzlLtp-4">
+                                                    <i data-lucide="play-circle" class="w-3 h-3"></i> 1.1.2 Platform Tour
+                                                </a>
                                             </div>
                                         </div>
-                                        <!-- Chapter 1.2 -->
-                                        <div class="bg-white rounded-md border border-gray-200">
-                                            <button
-                                                class="chapter-toggle-btn w-full p-2 text-sm font-medium text-gray-700 hover:bg-gray-50 flex justify-between items-center">
-                                                <span>Chapter 1.2: Core Concepts</span>
-                                                <i data-lucide="chevron-down"
-                                                    class="w-4 h-4 transition-transform duration-200"></i>
-                                            </button>
-                                            <div class="video-list hidden pl-3 pt-2 pb-1 space-y-1 border-l-2 border-primary-200 ml-3">
-                                                <!-- FIXED: Replaced invalid 'L_o-m9-k-k' with a valid ID -->
-                                                <a href="#" class="video-link block p-2 rounded-md hover:bg-primary-50 text-gray-600 hover:text-primary-600 text-sm" data-title="1.2.1 Core Video" data-video-id="_x-TFNa0-U">1.2.1 Core Video</a>
-                                            </div>
-                                        </div>
-                                        <!-- ... 13 more chapters ... -->
-                                        <!-- FIXED: All invalid IDs below are replaced with alternating valid ones for testing -->
-                                        <div class="bg-white rounded-md border border-gray-200"><button class="chapter-toggle-btn w-full p-2 text-sm font-medium text-gray-700 hover:bg-gray-50 flex justify-between items-center"><span>Chapter 1.3: Key Terms</span><i data-lucide="chevron-down" class="w-4 h-4 transition-transform duration-200"></i></button><div class="video-list hidden pl-3 pt-2 pb-1 space-y-1 border-l-2 border-primary-200 ml-3"><a href="#" class="video-link block p-2 rounded-md hover:bg-primary-50 text-gray-600 hover:text-primary-600 text-sm" data-title="1.3.1 Key Terms" data-video-id="aqz-KE-bpKQ">1.3.1 Key Terms</a></div></div>
-                                        <div class="bg-white rounded-md border border-gray-200"><button class="chapter-toggle-btn w-full p-2 text-sm font-medium text-gray-700 hover:bg-gray-50 flex justify-between items-center"><span>Chapter 1.4: ...</span><i data-lucide="chevron-down" class="w-4 h-4 transition-transform duration-200"></i></button><div class="video-list hidden pl-3 pt-2 pb-1 space-y-1 border-l-2 border-primary-200 ml-3"><a href="#" class="video-link block p-2 rounded-md hover:bg-primary-50 text-gray-600 hover:text-primary-600 text-sm" data-title="1.4.1 Video" data-video-id="_x-TFNa0-U">1.4.1 Video</a></div></div>
-                                        <div class="bg-white rounded-md border border-gray-200"><button class="chapter-toggle-btn w-full p-2 text-sm font-medium text-gray-700 hover:bg-gray-50 flex justify-between items-center"><span>Chapter 1.5: ...</span><i data-lucide="chevron-down" class="w-4 h-4 transition-transform duration-200"></i></button><div class="video-list hidden pl-3 pt-2 pb-1 space-y-1 border-l-2 border-primary-200 ml-3"><a href="#" class="video-link block p-2 rounded-md hover:bg-primary-50 text-gray-600 hover:text-primary-600 text-sm" data-title="1.5.1 Video" data-video-id="aqz-KE-bpKQ">1.5.1 Video</a></div></div>
-                                        <div class="bg-white rounded-md border border-gray-200"><button class="chapter-toggle-btn w-full p-2 text-sm font-medium text-gray-700 hover:bg-gray-50 flex justify-between items-center"><span>Chapter 1.6: ...</span><i data-lucide="chevron-down" class="w-4 h-4 transition-transform duration-200"></i></button><div class="video-list hidden pl-3 pt-2 pb-1 space-y-1 border-l-2 border-primary-200 ml-3"><a href="#" class="video-link block p-2 rounded-md hover:bg-primary-50 text-gray-600 hover:text-primary-600 text-sm" data-title="1.6.1 Video" data-video-id="_x-TFNa0-U">1.6.1 Video</a></div></div>
-                                        <div class="bg-white rounded-md border border-gray-200"><button class="chapter-toggle-btn w-full p-2 text-sm font-medium text-gray-700 hover:bg-gray-50 flex justify-between items-center"><span>Chapter 1.7: ...</span><i data-lucide="chevron-down" class="w-4 h-4 transition-transform duration-200"></i></button><div class="video-list hidden pl-3 pt-2 pb-1 space-y-1 border-l-2 border-primary-200 ml-3"><a href="#" class="video-link block p-2 rounded-md hover:bg-primary-50 text-gray-600 hover:text-primary-600 text-sm" data-title="1.7.1 Video" data-video-id="aqz-KE-bpKQ">1.7.1 Video</a></div></div>
-                                        <div class="bg-white rounded-md border border-gray-200"><button class="chapter-toggle-btn w-full p-2 text-sm font-medium text-gray-700 hover:bg-gray-50 flex justify-between items-center"><span>Chapter 1.8: ...</span><i data-lucide="chevron-down" class="w-4 h-4 transition-transform duration-200"></i></button><div class="video-list hidden pl-3 pt-2 pb-1 space-y-1 border-l-2 border-primary-200 ml-3"><a href="#" class="video-link block p-2 rounded-md hover:bg-primary-50 text-gray-600 hover:text-primary-600 text-sm" data-title="1.8.1 Video" data-video-id="_x-TFNa0-U">1.8.1 Video</a></div></div>
-                                        <div class="bg-white rounded-md border border-gray-200"><button class="chapter-toggle-btn w-full p-2 text-sm font-medium text-gray-700 hover:bg-gray-50 flex justify-between items-center"><span>Chapter 1.9: ...</span><i data-lucide="chevron-down" class="w-4 h-4 transition-transform duration-200"></i></button><div class="video-list hidden pl-3 pt-2 pb-1 space-y-1 border-l-2 border-primary-200 ml-3"><a href="#" class="video-link block p-2 rounded-md hover:bg-primary-50 text-gray-600 hover:text-primary-600 text-sm" data-title="1.9.1 Video" data-video-id="aqz-KE-bpKQ">1.9.1 Video</a></div></div>
-                                        <div class="bg-white rounded-md border border-gray-200"><button class="chapter-toggle-btn w-full p-2 text-sm font-medium text-gray-700 hover:bg-gray-50 flex justify-between items-center"><span>Chapter 1.10: ...</span><i data-lucide="chevron-down" class="w-4 h-4 transition-transform duration-200"></i></button><div class="video-list hidden pl-3 pt-2 pb-1 space-y-1 border-l-2 border-primary-200 ml-3"><a href="#" class="video-link block p-2 rounded-md hover:bg-primary-50 text-gray-600 hover:text-primary-600 text-sm" data-title="1.10.1 Video" data-video-id="_x-TFNa0-U">1.10.1 Video</a></div></div>
-                                        <div class="bg-white rounded-md border border-gray-200"><button class="chapter-toggle-btn w-full p-2 text-sm font-medium text-gray-700 hover:bg-gray-50 flex justify-between items-center"><span>Chapter 1.11: ...</span><i data-lucide="chevron-down" class="w-4 h-4 transition-transform duration-200"></i></button><div class="video-list hidden pl-3 pt-2 pb-1 space-y-1 border-l-2 border-primary-200 ml-3"><a href="#" class="video-link block p-2 rounded-md hover:bg-primary-50 text-gray-600 hover:text-primary-600 text-sm" data-title="1.11.1 Video" data-video-id="aqz-KE-bpKQ">1.11.1 Video</a></div></div>
-                                        <div class="bg-white rounded-md border border-gray-200"><button class="chapter-toggle-btn w-full p-2 text-sm font-medium text-gray-700 hover:bg-gray-50 flex justify-between items-center"><span>Chapter 1.12: ...</span><i data-lucide="chevron-down" class="w-4 h-4 transition-transform duration-200"></i></button><div class="video-list hidden pl-3 pt-2 pb-1 space-y-1 border-l-2 border-primary-200 ml-3"><a href="#" class="video-link block p-2 rounded-md hover:bg-primary-50 text-gray-600 hover:text-primary-600 text-sm" data-title="1.12.1 Video" data-video-id="_x-TFNa0-U">1.12.1 Video</a></div></div>
-                                        <div class="bg-white rounded-md border border-gray-200"><button class="chapter-toggle-btn w-full p-2 text-sm font-medium text-gray-700 hover:bg-gray-50 flex justify-between items-center"><span>Chapter 1.13: ...</span><i data-lucide="chevron-down" class="w-4 h-4 transition-transform duration-200"></i></button><div class="video-list hidden pl-3 pt-2 pb-1 space-y-1 border-l-2 border-primary-200 ml-3"><a href="#" class="video-link block p-2 rounded-md hover:bg-primary-50 text-gray-600 hover:text-primary-600 text-sm" data-title="1.13.1 Video" data-video-id="aqz-KE-bpKQ">1.13.1 Video</a></div></div>
-                                        <div class="bg-white rounded-md border border-gray-200"><button class="chapter-toggle-btn w-full p-2 text-sm font-medium text-gray-700 hover:bg-gray-50 flex justify-between items-center"><span>Chapter 1.14: ...</span><i data-lucide="chevron-down" class="w-4 h-4 transition-transform duration-200"></i></button><div class="video-list hidden pl-3 pt-2 pb-1 space-y-1 border-l-2 border-primary-200 ml-3"><a href="#" class="video-link block p-2 rounded-md hover:bg-primary-50 text-gray-600 hover:text-primary-600 text-sm" data-title="1.14.1 Video" data-video-id="_x-TFNa0-U">1.14.1 Video</a></div></div>
-                                        <div class="bg-white rounded-md border border-gray-200"><button class="chapter-toggle-btn w-full p-2 text-sm font-medium text-gray-700 hover:bg-gray-50 flex justify-between items-center"><span>Chapter 1.15: Review</span><i data-lucide="chevron-down" class="w-4 h-4 transition-transform duration-200"></i></button><div class="video-list hidden pl-3 pt-2 pb-1 space-y-1 border-l-2 border-primary-200 ml-3"><a href="#" class="video-link block p-2 rounded-md hover:bg-primary-50 text-gray-600 hover:text-primary-600 text-sm" data-title="1.15.1 Module 1 Review" data-video-id="aqz-KE-bpKQ">1.15.1 Module 1 Review</a></div></div>
                                     </div>
                                 </div>
-
-                                <!-- Module 2 -->
-                                <div class="bg-gray-50 rounded-lg border border-gray-200">
-                                    <button
-                                        class="module-toggle-btn w-full p-4 flex justify-between items-center text-left">
-                                        <span class="font-semibold text-gray-800">Module 2: Core Principles</span>
-                                        <i data-lucide="chevron-down"
-                                            class="w-5 h-5 text-gray-500 transition-transform duration-200"></i>
+                                <!-- Mock more modules -->
+                                <div class="border border-slate-200 rounded-lg overflow-hidden">
+                                    <button class="module-toggle-btn w-full p-3 flex justify-between items-center text-left bg-slate-50 hover:bg-slate-100 transition-colors">
+                                        <span class="font-semibold text-sm text-slate-800">Module 2: Advanced Topics</span>
+                                        <i data-lucide="chevron-down" class="w-4 h-4 text-slate-400"></i>
                                     </button>
-                                    <div class="chapter-list hidden p-2 space-y-2">
-                                        <!-- Chapter 2.1 -->
-                                        <div class="bg-white rounded-md border border-gray-200">
-                                            <button
-                                                class="chapter-toggle-btn w-full p-2 text-sm font-medium text-gray-700 hover:bg-gray-50 flex justify-between items-center">
-                                                <span>Chapter 2.1: First Principle</span>
-                                                <i data-lucide="chevron-down"
-                                                    class="w-4 h-4 transition-transform duration-200"></i>
-                                            </button>
-                                            <div class="video-list hidden pl-3 pt-2 pb-1 space-y-1 border-l-2 border-primary-200 ml-3">
-                                                <a href="#" class="video-link block p-2 rounded-md hover:bg-primary-50 text-gray-600 hover:text-primary-600 text-sm" data-title="2.1.1 Explaining the Principle" data-video-id="_x-TFNa0-U">2.1.1 Explaining the Principle</a>
-                                            </div>
-                                        </div>
-                                         <!-- Chapter 2.2 -->
-                                        <div class="bg-white rounded-md border border-gray-200">
-                                            <button
-                                                class="chapter-toggle-btn w-full p-2 text-sm font-medium text-gray-700 hover:bg-gray-50 flex justify-between items-center">
-                                                <span>Chapter 2.2: Worked Examples</span>
-                                                <i data-lucide="chevron-down"
-                                                    class="w-4 h-4 transition-transform duration-200"></i>
-                                            </button>
-                                            <div class="video-list hidden pl-3 pt-2 pb-1 space-y-1 border-l-2 border-primary-200 ml-3">
-                                                <a href="#" class="video-link block p-2 rounded-md hover:bg-primary-50 text-gray-600 hover:text-primary-600 text-sm" data-title="2.2.1 Worked Example 1" data-video-id="aqz-KE-bpKQ">2.2.1 Worked Example 1</a>
-                                                <a href="#" class="video-link block p-2 rounded-md hover:bg-primary-50 text-gray-600 hover:text-primary-600 text-sm" data-title="2.2.2 Worked Example 2" data-video-id="_x-TFNa0-U">2.2.2 Worked Example 2</a>
-                                            </div>
-                                        </div>
-                                        <!-- ... 13 more chapters ... -->
-                                    </div>
-                                </div>
-
-                                <!-- Module 3 -->
-                                <div class="bg-gray-50 rounded-lg border border-gray-200">
-                                    <button
-                                        class="module-toggle-btn w-full p-4 flex justify-between items-center text-left">
-                                        <span class="font-semibold text-gray-800">Module 3: Advanced Techniques</span>
-                                        <i data-lucide="chevron-down"
-                                            class="w-5 h-5 text-gray-500 transition-transform duration-200"></i>
-                                    </button>
-                                    <div class="chapter-list hidden p-2 space-y-2">
-                                        <!-- Chapter 3.1 -->
-                                        <div class="bg-white rounded-md border border-gray-200">
-                                            <button
-                                                class="chapter-toggle-btn w-full p-2 text-sm font-medium text-gray-700 hover:bg-gray-50 flex justify-between items-center">
-                                                <span>Chapter 3.1: Technique A</span>
-                                                <i data-lucide="chevron-down"
-                                                    class="w-4 h-4 transition-transform duration-200"></i>
-                                            </button>
-                                            <div class="video-list hidden pl-3 pt-2 pb-1 space-y-1 border-l-2 border-primary-200 ml-3">
-                                                <a href="#" class="video-link block p-2 rounded-md hover:bg-primary-50 text-gray-600 hover:text-primary-600 text-sm" data-title="3.1.1 Video for Technique A" data-video-id="aqz-KE-bpKQ">3.1.1 Video for Technique A</a>
-                                            </div>
-                                        </div>
-                                        <!-- ... 14 more chapters ... -->
-                                    </div>
-                                </div>
-
-                                <!-- Module 4 -->
-                                <div class="bg-gray-50 rounded-lg border border-gray-200">
-                                    <button
-                                        class="module-toggle-btn w-full p-4 flex justify-between items-center text-left">
-                                        <span class="font-semibold text-gray-800">Module 4: Final Project & Review</span>
-                                        <i data-lucide="chevron-down"
-                                            class="w-5 h-5 text-gray-500 transition-transform duration-200"></i>
-                                    </button>
-                                    <div class="chapter-list hidden p-2 space-y-2">
-                                        <!-- Chapter 4.1 -->
-                                        <div class="bg-white rounded-md border border-gray-200">
-                                            <button
-                                                class="chapter-toggle-btn w-full p-2 text-sm font-medium text-gray-700 hover:bg-gray-50 flex justify-between items-center">
-                                                <span>Chapter 4.1: Summary</span>
-                                                <i data-lucide="chevron-down"
-                                                    class="w-4 h-4 transition-transform duration-200"></i>
-                                            </button>
-                                            <div class="video-list hidden pl-3 pt-2 pb-1 space-y-1 border-l-2 border-primary-200 ml-3">
-                                                <a href="#" class="video-link block p-2 rounded-md hover:bg-primary-50 text-gray-600 hover:text-primary-600 text-sm" data-title="4.1.1 Final Summary Video" data-video-id="_x-TFNa0-U">4.1.1 Final Summary Video</a>
-                                            </div>
-                                        </div>
-                                        <!-- ... 14 more chapters ... -->
+                                    <div class="chapter-list hidden bg-white p-4 text-center text-xs text-slate-400">
+                                        Locked content
                                     </div>
                                 </div>
                             </div>
@@ -674,25 +674,37 @@
                 </div>
             </div>
         </div>
-        <!-- End Course Player Section -->
 
     </div>
-    <!-- End Global Container -->
 
-    <!-- Main Application Script -->
+    <!-- Logic -->
     <script>
-        // FIXED: Consolidated all logic into a single 'window.load' event.
-        // This ensures all external scripts (Plyr, Lucide) are fully loaded
-        // and initialized before any code attempts to use them, preventing
-        // race conditions and "Script errors".
-        window.addEventListener('load', (event) => {
+        window.addEventListener('load', () => {
             try {
-                // --- Global Variables ---
+                // --- 1. Announcement Bar - Image Logic (No text carousel) ---
+                // User can replace src in HTML to update banner.
+
+                // --- 2. Lucide Icons ---
+                if (typeof lucide !== 'undefined') lucide.createIcons();
+
+                // --- 3. Sticky Navbar Style on Scroll ---
+                const navbar = document.getElementById('navbar');
+                window.addEventListener('scroll', () => {
+                    if (window.scrollY > 50) {
+                        navbar.classList.add('shadow-md', 'bg-white/95');
+                        navbar.classList.remove('bg-white/80');
+                    } else {
+                        navbar.classList.remove('shadow-md', 'bg-white/95');
+                        navbar.classList.add('bg-white/80');
+                    }
+                });
+
+                // --- 4. General UI Logic (Modals, Filters) ---
                 const mobileMenuBtn = document.getElementById('mobile-menu-btn');
                 const mobileMenu = document.getElementById('mobile-menu');
                 const buyNowBtns = document.querySelectorAll('.buy-now-btn');
                 const modal = document.getElementById('course-preview-modal');
-                const modalOverlay = document.getElementById('course-preview-modal');
+                const modalPanel = document.getElementById('modal-panel');
                 const modalCloseBtn = document.getElementById('modal-close-btn');
                 const startCourseBtn = document.getElementById('start-course-btn');
                 const gradeFilterBtns = document.querySelectorAll('.grade-filter-btn');
@@ -700,60 +712,28 @@
                 const landingPage = document.getElementById('landing-page');
                 const coursePlayerPage = document.getElementById('course-player-page');
                 const exitPlayerBtn = document.getElementById('exit-player-btn');
-                
-                // REMOVED: plyrOverlay variable is no longer needed.
-                // const plyrOverlay = document.getElementById('plyr-overlay'); 
-                
                 const currentVideoTitleEl = document.getElementById('current-video-title');
-                
-                let player; // To hold the Plyr instance
+                let player;
 
-                // --- Icon Loading ---
-                // FIXED: Run the initial createIcons() here, inside the main 'load'
-                // listener to ensure 'lucide' is defined and to render all
-                // icons on page load.
-                try {
-                    if (typeof lucide !== 'undefined') {
-                        lucide.createIcons();
-                    } else {
-                        console.error("Lucide library not loaded at window.load.");
-                    }
-                } catch (e) {
-                    console.error("Lucide icon creation failed at window.load:", e);
-                }
-
-                // --- Mobile Menu Toggle ---
-                if (mobileMenuBtn && mobileMenu) {
+                // Mobile Menu
+                if (mobileMenuBtn) {
                     mobileMenuBtn.addEventListener('click', () => {
                         mobileMenu.classList.toggle('hidden');
-                        const icon = mobileMenuBtn.querySelector('i');
-                        if (mobileMenu.classList.contains('hidden')) {
-                            icon.setAttribute('data-lucide', 'menu');
-                        } else {
-                            icon.setAttribute('data-lucide', 'x');
-                        }
-                        // This call is still necessary to update the icon
-                        // *after* the click event.
-                        try {
-                            if (typeof lucide !== 'undefined') {
-                                lucide.createIcons();
-                            }
-                        } catch (e) { // <-- FIXED: Added missing curly braces
-                            console.error("Lucide icon update failed:", e);
-                        }
+                        if(typeof lucide !== 'undefined') lucide.createIcons();
                     });
                 }
 
-                // --- Grade Filtering Logic ---
+                // Filter Logic
                 gradeFilterBtns.forEach(button => {
                     button.addEventListener('click', () => {
                         const selectedGrade = button.getAttribute('data-grade');
                         gradeFilterBtns.forEach(btn => {
-                            btn.classList.remove('bg-primary-600', 'text-white');
-                            btn.classList.add('bg-gray-100', 'text-gray-700', 'hover:bg-gray-200');
+                            btn.classList.remove('bg-brand-600', 'text-white', 'shadow-lg');
+                            btn.classList.add('bg-white', 'text-slate-600', 'hover:bg-slate-100');
                         });
-                        button.classList.add('bg-primary-600', 'text-white');
-                        button.classList.remove('bg-gray-100', 'text-gray-700', 'hover:bg-gray-200');
+                        button.classList.remove('bg-white', 'text-slate-600', 'hover:bg-slate-100');
+                        button.classList.add('bg-brand-600', 'text-white', 'shadow-lg');
+
                         courseCards.forEach(card => {
                             if (selectedGrade === 'all' || card.getAttribute('data-grade') === selectedGrade) {
                                 card.style.display = 'flex';
@@ -764,19 +744,14 @@
                     });
                 });
 
-                // --- Course Preview Modal Logic ---
+                // Modal Logic with Animations
                 const openModal = (card) => {
-                    if (!card) {
-                        console.error("openModal was called without a card.");
-                        return;
-                    }
                     const title = card.getAttribute('data-title');
                     const description = card.getAttribute('data-description');
                     const price = card.getAttribute('data-price');
                     const subjects = card.getAttribute('data-subjects');
                     const videos = card.getAttribute('data-videos');
-                    const imageEl = card.querySelector('img');
-                    const image = imageEl ? imageEl.src : "https://placehold.co/600x300/0ea5e9/white?text=Error";
+                    const image = card.querySelector('img') ? card.querySelector('img').src : "";
 
                     document.getElementById('modal-title').textContent = title;
                     document.getElementById('modal-description').textContent = description;
@@ -784,155 +759,186 @@
                     document.getElementById('modal-subjects').textContent = subjects;
                     document.getElementById('modal-videos').textContent = `${videos} Videos`;
                     document.getElementById('modal-image').src = image;
+                    
                     document.getElementById('player-course-title').textContent = title;
                     document.getElementById('mobile-player-course-title').textContent = title;
 
                     modal.classList.remove('hidden');
+                    // Small delay to allow display:block to apply before opacity transition
+                    setTimeout(() => {
+                        modal.classList.remove('opacity-0');
+                        modalPanel.classList.remove('scale-95');
+                        modalPanel.classList.add('scale-100');
+                    }, 10);
                     document.body.style.overflow = 'hidden';
                 };
 
                 const closeModal = () => {
-                    modal.classList.add('hidden');
-                    document.body.style.overflow = 'auto';
+                    modal.classList.add('opacity-0');
+                    modalPanel.classList.remove('scale-100');
+                    modalPanel.classList.add('scale-95');
+                    setTimeout(() => {
+                        modal.classList.add('hidden');
+                        document.body.style.overflow = 'auto';
+                    }, 300);
                 };
 
-                buyNowBtns.forEach(button => {
-                    button.addEventListener('click', (e) => {
+                buyNowBtns.forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        e.stopPropagation(); // Prevent triggering card click if we add that later
                         const card = e.target.closest('.course-card');
                         openModal(card);
                     });
                 });
+                
+                // Also allow clicking the image to open modal
+                courseCards.forEach(card => {
+                    const img = card.querySelector('.relative');
+                    if(img) {
+                        img.style.cursor = 'pointer';
+                        img.addEventListener('click', () => openModal(card));
+                    }
+                });
 
                 if (modalCloseBtn) modalCloseBtn.addEventListener('click', closeModal);
-                if (modalOverlay) {
-                    modalOverlay.addEventListener('click', (e) => {
-                        if (e.target === modalOverlay) {
-                            closeModal();
-                        }
-                    });
-                }
-                
-                // --- Course Player Logic ---
+                modal.addEventListener('click', (e) => {
+                    if (e.target === modal) closeModal();
+                });
+
+                // Player Logic (Re-written for stability)
                 const initPlayer = () => {
-                    // ADDED: Extra try/catch directly around the player initialization
                     try {
                         if (player) {
                             player.destroy();
                         }
                         
-                        if (typeof Plyr === 'undefined') {
-                            console.error("Plyr is not loaded. Cannot initialize player.");
-                            return;
-                        }
-
-                        // Initialized player without the overlay logic
-                        player = new Plyr('#video-player', {
-                            youtube: { noCookie: true, rel: 0 },
-                            controls: [
-                                'play', 'progress', 'current-time', 'mute', 'volume',
-                                'settings', 'fullscreen'
-                            ]
-                        });
+                        // Nuclear option: Re-write the container HTML to ensure a fresh start
+                        // Using the IFRAME method is more robust for YouTube in some environments
+                        const videoWrapper = document.getElementById('video-wrapper');
+                        videoWrapper.innerHTML = `
+                            <div id="video-player" class="plyr__video-embed">
+                                <iframe
+                                    src="https://www.youtube.com/embed/bTqVqk7FSmY?origin=https://plyr.io&amp;iv_load_policy=3&amp;modestbranding=1&amp;playsinline=1&amp;showinfo=0&amp;rel=0&amp;enablejsapi=1"
+                                    allowfullscreen
+                                    allowtransparency
+                                    allow="autoplay"
+                                ></iframe>
+                            </div>
+                        `;
                         
-                        // REMOVED: All event listeners ('pause', 'play', 'ended') that
-                        // controlled the custom overlay have been removed to fix the script error.
-                    } catch (e) {
-                        console.error("CRITICAL ERROR initializing Plyr player:", e);
-                    }
+                        player = new Plyr('#video-player', {
+                            controls: ['play', 'progress', 'current-time', 'mute', 'volume', 'settings', 'fullscreen']
+                        });
+
+                        // --- Video End Handler for Completion Tracking ---
+                        player.on('ended', () => {
+                            // 1. Hide Suggested Videos: Reset/Stop the player instantly
+                            player.stop(); 
+
+                            // 2. Green Tick Completion Logic
+                            const activeLink = document.querySelector('.video-link.bg-brand-50'); // Finds current active link
+                            if (activeLink) {
+                                // Replace icon logic
+                                // We search for the Lucide icon container (it's likely an SVG now)
+                                const iconContainer = activeLink.querySelector('svg') || activeLink.querySelector('i');
+                                
+                                if (iconContainer) {
+                                    // Create new green check icon
+                                    const greenCheck = document.createElement('i');
+                                    greenCheck.setAttribute('data-lucide', 'check-circle-2');
+                                    greenCheck.className = "w-3 h-3 text-green-600"; // Green color
+                                    
+                                    // Replace old icon with new green check
+                                    iconContainer.replaceWith(greenCheck);
+                                    
+                                    // Refresh Lucide to render the new icon
+                                    lucide.createIcons();
+                                }
+                            }
+                        });
+
+                    } catch(e) { console.error("Player init failed", e); }
                 };
-                
-                const showCoursePlayer = () => {
+
+                startCourseBtn.addEventListener('click', () => {
+                    closeModal();
                     landingPage.classList.add('hidden');
                     coursePlayerPage.classList.remove('hidden');
-                    window.scrollTo(0, 0);
-                    closeModal();
-                    initPlayer();
-                };
+                    window.scrollTo(0,0);
+                    // Timeout ensures the DOM is visible before Plyr tries to calculate dimensions
+                    setTimeout(initPlayer, 100);
+                });
 
-                const hideCoursePlayer = () => {
-                    landingPage.classList.remove('hidden');
-                    coursePlayerPage.classList.add('hidden');
-                    if (player) {
-                        player.stop();
-                    }
-                };
-                
-                if (startCourseBtn) startCourseBtn.addEventListener('click', showCoursePlayer);
-                if (exitPlayerBtn) exitPlayerBtn.addEventListener('click', (e) => {
+                exitPlayerBtn.addEventListener('click', (e) => {
                     e.preventDefault();
-                    hideCoursePlayer();
+                    coursePlayerPage.classList.add('hidden');
+                    landingPage.classList.remove('hidden');
+                    if(player) player.stop();
                 });
 
-                // --- Course Player Syllabus Logic ---
-                const moduleToggleBtns = document.querySelectorAll('.module-toggle-btn');
-                const chapterToggleBtns = document.querySelectorAll('.chapter-toggle-btn');
-                const videoLinks = document.querySelectorAll('.video-link');
-
-                moduleToggleBtns.forEach(button => {
-                    button.addEventListener('click', () => {
-                        const chapterList = button.nextElementSibling;
-                        const icon = button.lastElementChild;
-                        if (!chapterList || !icon || !icon.classList.contains('lucide')) {
-                            console.error('Could not find chapter list or icon for module button.', button);
-                            return;
-                        }
-                        chapterList.classList.toggle('hidden');
-                        icon.classList.toggle('rotate-180');
+                // Syllabus Toggles
+                document.querySelectorAll('.module-toggle-btn').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const list = btn.nextElementSibling;
+                        const icon = btn.querySelector('.lucide-chevron-down');
+                        list.classList.toggle('hidden');
+                        icon.style.transform = list.classList.contains('hidden') ? 'rotate(0deg)' : 'rotate(180deg)';
                     });
                 });
                 
-                chapterToggleBtns.forEach(button => {
-                    button.addEventListener('click', () => {
-                        const videoList = button.nextElementSibling;
-                        const icon = button.lastElementChild;
-                        if (!videoList || !icon || !icon.classList.contains('lucide')) {
-                             console.error('Could not find video list or icon for chapter button.', button);
-                            return;
-                        }
-                        videoList.classList.toggle('hidden');
-                        icon.classList.toggle('rotate-180');
+                document.querySelectorAll('.chapter-toggle-btn').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const list = btn.nextElementSibling;
+                        const icon = btn.querySelector('.lucide-chevron-down');
+                        list.classList.toggle('hidden');
+                        icon.style.transform = list.classList.contains('hidden') ? 'rotate(0deg)' : 'rotate(180deg)';
                     });
                 });
 
-                videoLinks.forEach(link => {
+                document.querySelectorAll('.video-link').forEach(link => {
                     link.addEventListener('click', (e) => {
                         e.preventDefault();
-                        const videoId = link.getAttribute('data-video-id');
-                        const videoTitle = link.getAttribute('data-title');
+                        const vidId = link.getAttribute('data-video-id');
+                        const vidTitle = link.getAttribute('data-title');
                         
-                        if (player && videoId) {
+                        // Update active state styling
+                        document.querySelectorAll('.video-link').forEach(l => {
+                           l.classList.remove('bg-brand-50', 'text-brand-700'); 
+                           l.classList.add('text-slate-600');
+                           // Reset icon color if needed, or keep green checks
+                           const icon = l.querySelector('svg');
+                           if(icon && !icon.classList.contains('text-green-600')) {
+                               icon.classList.remove('fill-current');
+                           }
+                        });
+                        link.classList.add('bg-brand-50', 'text-brand-700');
+                        link.classList.remove('text-slate-600');
+                        // Ensure current play icon is filled
+                        const currentIcon = link.querySelector('svg');
+                        if(currentIcon && !currentIcon.classList.contains('text-green-600')){
+                            currentIcon.classList.add('fill-current');
+                        }
+
+                        if(player && vidId) {
                             player.source = {
                                 type: 'video',
-                                sources: [{
-                                    src: videoId,
-                                    provider: 'youtube',
-                                }],
+                                sources: [
+                                    {
+                                        src: vidId,
+                                        provider: 'youtube',
+                                    },
+                                ],
                             };
                             player.play();
-                            currentVideoTitleEl.textContent = videoTitle;
-                            videoLinks.forEach(l => l.classList.remove('bg-primary-100', 'text-primary-700', 'font-semibold'));
-                            link.classList.add('bg-primary-100', 'text-primary-700', 'font-semibold');
+                            currentVideoTitleEl.textContent = vidTitle;
                         }
                     });
                 });
-                
-                if (videoLinks.length > 0) {
-                     videoLinks[0].classList.add('bg-primary-100', 'text-primary-700', 'font-semibold');
-                }
 
-                // REMOVED: Anti-Copying Code. This is a likely source of the
-                // cross-origin "Script error" as it interferes with browser
-                // default behaviors that the YouTube iframe might rely on.
-                
-            } catch (error) {
-                console.error("A critical error occurred during page load initialization:", error);
+            } catch (err) {
+                console.error("Init error:", err);
             }
         });
-
-        // REMOVED: The separate 'window.load' listener for lucide has been
-        // consolidated into the main 'load' listener above.
     </script>
-
 </body>
-
 </html>
