@@ -9,10 +9,10 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Load Plyr.js CSS -->
     <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
-    <!-- Load Google Font: Plus Jakarta Sans (Premium feeling font) -->
+    <!-- Load Google Fonts: Plus Jakarta Sans (Modern UI) & Crimson Text (Ancient Paper UI) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
     
     <!-- Load Scripts -->
     <script src="https://cdn.plyr.io/3.7.8/plyr.js"></script>
@@ -107,14 +107,100 @@
             animation-delay: 4s;
         }
         
-        /* Typography for Info Pages */
-        .prose h1 { @apply text-3xl font-extrabold text-slate-900 mb-6 border-b-2 border-brand-100 pb-4; }
-        .prose h2 { @apply text-xl font-bold text-brand-800 mt-10 mb-4 flex items-center gap-2; }
-        .prose h3 { @apply text-lg font-semibold text-slate-700 mt-6 mb-2 border-l-4 border-brand-400 pl-3; }
-        .prose p { @apply text-slate-600 mb-4 leading-relaxed; }
-        .prose ul { @apply list-none text-slate-600 mb-6 space-y-2 ml-2; }
-        .prose li { @apply relative pl-6 before:content-['•'] before:absolute before:left-0 before:text-brand-500 before:font-bold; }
-        .prose strong { @apply font-bold text-slate-800; }
+        /* --- ANCIENT PAPYRUS DESIGN STYLE --- */
+        .papyrus-paper {
+            background-color: #fdf6e3; /* Parchment base */
+            background-image: url("data:image/svg+xml,%3Csvg width='200' height='200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.07'/%3E%3C/svg%3E");
+            box-shadow: 
+                0 1px 4px rgba(0,0,0,0.05), 
+                0 0 40px rgba(0,0,0,0.02) inset,
+                0 0 10px rgba(139, 69, 19, 0.1) inset; /* Inner glow for aged edge */
+            border: 1px solid #e6d5b8;
+            color: #3e2723; /* Deep Sepia Ink */
+            font-family: 'Crimson Text', serif;
+            line-height: 1.8;
+        }
+
+        .papyrus-paper h1 {
+            font-family: 'Crimson Text', serif;
+            font-weight: 700;
+            color: #2e1a16; /* Darker Ink */
+            font-size: 2.2rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid #d7ccc8;
+            padding-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+            text-align: center;
+        }
+
+        .papyrus-paper h2 {
+            font-family: 'Crimson Text', serif;
+            font-weight: 700;
+            color: #4e342e;
+            font-size: 1.5rem;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            border-bottom: 1px dashed #d7ccc8;
+            padding-bottom: 0.25rem;
+            display: inline-block;
+        }
+
+        .papyrus-paper h3 {
+            font-family: 'Crimson Text', serif;
+            font-weight: 600;
+            color: #5d4037;
+            font-size: 1.25rem;
+            margin-top: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .papyrus-paper ul {
+            list-style-type: none;
+            margin-left: 0;
+            margin-bottom: 1.5rem;
+        }
+
+        .papyrus-paper li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .papyrus-paper li::before {
+            content: '❧'; /* Floral leaf bullet */
+            position: absolute;
+            left: 0;
+            color: #8d6e63;
+            font-size: 1.2rem;
+            line-height: 1.5rem;
+        }
+
+        .papyrus-paper p {
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+        
+        .papyrus-paper strong {
+            color: #271c19;
+            font-weight: 700;
+        }
+        
+        .papyrus-paper .highlight-box {
+            background-color: rgba(141, 110, 99, 0.08);
+            border-left: 4px solid #8d6e63;
+            padding: 1rem 1.5rem;
+            margin: 1.5rem 0;
+            font-style: italic;
+            border-radius: 0 4px 4px 0;
+        }
+        
+        .papyrus-paper .contact-box {
+            background-color: #fff8e1;
+            border: 1px solid #ffe082;
+            padding: 1rem;
+            border-radius: 4px;
+            margin-top: 1rem;
+        }
     </style>
     <script>
         // Custom Tailwind Config with Premium Colors
@@ -502,15 +588,15 @@
                 </div>
             </header>
             
-            <!-- Content Area -->
-            <div class="container mx-auto px-6 py-12 max-w-4xl">
-                <div id="info-content-area" class="prose prose-slate lg:prose-lg max-w-none">
+            <!-- Content Area with Papyrus Theme -->
+            <div class="min-h-screen bg-slate-50 py-12 px-4 sm:px-6 lg:px-8">
+                <div id="info-content-area" class="papyrus-paper max-w-4xl mx-auto p-8 md:p-12 lg:p-16 rounded-lg shadow-2xl transform transition-all">
                     <!-- Dynamic content injected here -->
                 </div>
             </div>
             
             <!-- Simple Footer for Info Page -->
-            <div class="border-t border-slate-100 py-8 text-center text-slate-400 text-sm">
+            <div class="border-t border-slate-100 py-8 text-center text-slate-400 text-sm bg-white">
                 &copy; 2024 Vidyantrix. All rights reserved.
             </div>
         </div>
@@ -559,217 +645,312 @@
                     <li>Personalized academic support</li>
                     <li>Performance tracking tools</li>
                 </ul>
-                <p class="mt-8 font-medium text-brand-700 italic">Vidyantrix aims to serve as a trusted guide throughout a student’s learning journey, offering a balance of structure, flexibility, and academic discipline.</p>
+                <div class="highlight-box">Vidyantrix aims to serve as a trusted guide throughout a student’s learning journey, offering a balance of structure, flexibility, and academic discipline.</div>
             `,
             'contact': `
                 <h1>Contact Us</h1>
-                <p class="text-lg text-slate-700">We welcome all questions, feedback, and support requests.</p>
-                <p>Our team is committed to providing timely and helpful assistance.</p>
+                <p>We welcome all questions, feedback, and support requests. Our team is committed to providing timely and helpful assistance.</p>
                 
-                <div class="grid md:grid-cols-2 gap-6 mt-8 mb-8">
-                    <div class="p-6 bg-slate-50 rounded-xl border border-slate-200">
-                        <h3 class="!mt-0 !border-0 text-brand-700">Reach Out</h3>
-                        <div class="flex items-center gap-3 mb-3">
-                            <i data-lucide="mail" class="text-brand-600"></i>
-                            <span class="font-medium">support@vidyantrix.com</span>
-                        </div>
-                        <div class="flex items-center gap-3">
-                            <i data-lucide="phone" class="text-brand-600"></i>
-                            <span class="font-medium">+91-XXXXXXXXXX</span>
-                        </div>
-                    </div>
-                    <div class="p-6 bg-slate-50 rounded-xl border border-slate-200">
-                        <h3 class="!mt-0 !border-0 text-brand-700">Operating Hours</h3>
-                        <p class="!mb-1 text-slate-700">Monday to Saturday</p>
-                        <p class="font-bold text-slate-900">10:00 AM – 7:00 PM</p>
-                    </div>
-                </div>
+                <h2>Reach Out</h2>
+                <p><strong>Email:</strong> support@vidyantrix.com</p>
+                <p><strong>Phone:</strong> +91-XXXXXXXXXX</p>
+                
+                <h2>Operating Hours</h2>
+                <p>Monday to Saturday</p>
+                <p><strong>10:00 AM – 7:00 PM</strong></p>
 
-                <p>Vidyantrix functions as a digital-first platform. Inquiries will be addressed through online communication channels.</p>
-                <p class="text-sm text-slate-500 mt-6 bg-yellow-50 p-3 rounded border border-yellow-200">For technical issues, billing queries, or class-related assistance, please contact us via email for a detailed response.</p>
+                <div class="highlight-box">Vidyantrix functions as a digital-first platform. Inquiries will be addressed through online communication channels.</div>
+                <p style="font-size: 0.9em; color: #5d4037;">For technical issues, billing queries, or class-related assistance, please contact us via email for a detailed response.</p>
             `,
             'privacy': `
-                <h1>Privacy Policy</h1>
-                <p>This Privacy Policy outlines how <strong class="text-brand-700">Vidyantrix</strong> (hereinafter referred to as “we”, “our”, or “the Platform”) collects, processes, stores, protects, and utilizes information provided by users (“you”, “your”).</p>
-                <p>By accessing or using this Platform, you agree to the practices described in this Policy.</p>
+                <h1>COPYRIGHT & PRIVACY POLICY</h1>
+                <p style="font-style: italic; font-size: 0.9em; color: #5d4037; text-align: center;">Updated on 23rd November 2025</p>
+                <p>This Privacy Policy applies to information collected by Vidyantrix Online Learning Platform through any digital interface owned and operated by Vidyantrix (hereinafter referred to as “Organization”, “Vidyantrix”, “We”, “Us”, or “Our”).</p>
+                <p>Vidyantrix is an online-only educational platform that provides structured academic learning, live online classes, recorded video courses, assessments, doubt-solving sessions, and related digital resources (“Services”). As part of delivering these Services, the Organization may obtain, receive, store, or process certain categories of personal data of its Users (“You”, “Your”, or “User”).</p>
+                <p>Our Organization is committed to safeguarding the confidentiality, integrity, and lawful processing of personal information. This Privacy Policy outlines the nature of data collected, the purpose of its processing, the duration for which it is retained, and the rights available to Users under applicable laws.</p>
 
-                <h2>1. Information We Collect</h2>
-                <p>We may collect and process the following categories of information:</p>
-                <h3>1.1 Personal Information</h3>
+                <h2>SECTION 1 — WHAT DATA DO WE COLLECT?</h2>
+                <p>Vidyantrix may collect, store, process, or utilize the following categories of information:</p>
+                
+                <h3>1.1 Personal Identification Data</h3>
                 <ul>
-                    <li>Name, email address, phone number</li>
-                    <li>Age or date of birth (if required)</li>
-                    <li>Location details (as provided by the user)</li>
-                </ul>
-                <h3>1.2 Transactional Information</h3>
-                <ul>
-                    <li>Payment confirmations</li>
-                    <li>Billing details</li>
-                    <li>Course purchase records</li>
-                </ul>
-                <p class="text-sm text-slate-500 italic pl-4 border-l-2 border-slate-300">Note: Payment data is processed securely through third-party payment gateways.</p>
-                <h3>1.3 Usage Information</h3>
-                <ul>
-                    <li>Login details</li>
-                    <li>Device/browser information</li>
-                    <li>Interaction data related to classes, courses, or materials</li>
-                    <li>Cookies and analytical identifiers</li>
+                    <li>Full Name</li>
+                    <li>Email Address</li>
+                    <li>Phone Number / WhatsApp Number</li>
+                    <li>Age / Date of Birth (optional)</li>
+                    <li>Gender (optional)</li>
+                    <li>Location Details (Country/State/City)</li>
                 </ul>
 
-                <h2>2. How We Use Your Information</h2>
-                <p>We use collected data to:</p>
+                <h3>1.2 Account & Profile Data</h3>
                 <ul>
-                    <li>Provide access to courses, classes, assessments, and materials</li>
-                    <li>Verify identity and manage user accounts</li>
-                    <li>Process transactions</li>
-                    <li>Deliver notifications, reminders, and important updates</li>
-                    <li>Improve platform performance and user experience</li>
-                    <li>Enhance course recommendations and academic support</li>
-                    <li>Ensure system integrity and security</li>
+                    <li>Username</li>
+                    <li>Student ID</li>
+                    <li>Course Enrollment Information</li>
+                    <li>Academic preferences & selected subjects</li>
                 </ul>
 
-                <h2>3. Sharing of Information</h2>
-                <p>We may share necessary information with:</p>
+                <h3>1.3 Transaction & Payment Data</h3>
                 <ul>
-                    <li>Payment gateway partners</li>
-                    <li>Technical service providers</li>
-                    <li>Customer support tools</li>
-                    <li>Legal authorities, if required</li>
+                    <li>Transaction IDs</li>
+                    <li>Payment confirmation details</li>
+                    <li>Purchase history of courses or subscriptions</li>
                 </ul>
-                <p><strong class="text-brand-700">We do not sell or rent your information to third parties.</strong></p>
+                <div class="highlight-box">Note: Vidyantrix does NOT store card numbers, CVV, UPI IDs. Payments are processed securely by third-party gateways.</div>
 
-                <h2>4. Data Protection & Retention</h2>
-                <p>We implement industry-standard security measures to safeguard your data. Your information may be retained for:</p>
+                <h3>1.4 Technical & Usage Information</h3>
                 <ul>
-                    <li>Legal compliance</li>
-                    <li>Transactional verification</li>
-                    <li>Academic service continuity</li>
-                    <li>Internal analysis and performance improvement</li>
+                    <li>IP address</li>
+                    <li>Device & Browser information</li>
+                    <li>Login logs</li>
+                    <li>Time spent on courses</li>
+                    <li>Interaction with live classes & assessments</li>
                 </ul>
-                <p>Data is stored securely and accessed only by authorized personnel.</p>
 
-                <h2>5. User Rights</h2>
-                <p>You may request:</p>
+                <h3>1.5 Communication Information</h3>
                 <ul>
-                    <li>Correction of incorrect or outdated information</li>
-                    <li>Deletion of your account (subject to legal and operational constraints)</li>
-                    <li>Information on how your data is being used</li>
+                    <li>Messages sent through in-platform chat</li>
+                    <li>Emails or support tickets shared with Vidyantrix</li>
                 </ul>
-                <p>For such requests, contact: <a href="mailto:privacy@vidyantrix.com" class="text-brand-600 underline font-bold">privacy@vidyantrix.com</a></p>
 
-                <h2>6. Policy Updates</h2>
-                <p>Vidyantrix may revise this Privacy Policy periodically. Continued use of the Platform constitutes acceptance of updated terms.</p>
+                <h2>SECTION 2 — HOW DO WE COLLECT YOUR DATA?</h2>
+                <p>Vidyantrix collects data primarily through the following means:</p>
+                <h3>2.1 Direct Submission by User</h3>
+                <ul>
+                    <li>Registration forms</li>
+                    <li>Course purchase forms</li>
+                    <li>Support requests</li>
+                    <li>Email communications</li>
+                    <li>Uploaded documents (optional)</li>
+                </ul>
+                <h3>2.2 Automatic Data Collection</h3>
+                <ul>
+                    <li>On login</li>
+                    <li>On accessing any learning module</li>
+                    <li>On interacting with the platform</li>
+                </ul>
+                <h3>2.3 Third-Party Sources</h3>
+                <ul>
+                    <li>Payment gateways</li>
+                    <li>Authentication providers (email/OTP verification)</li>
+                </ul>
+                <p>There is no offline data collection as Vidyantrix operates entirely online.</p>
+
+                <h2>SECTION 3 — HOW WILL WE USE YOUR DATA?</h2>
+                <p>Vidyantrix processes User data for the following operational, legitimate, and lawful purposes:</p>
+                <h3>3.1 Service Delivery</h3>
+                <ul>
+                    <li>Providing access to purchased courses</li>
+                    <li>Enabling live classes, doubt sessions & assessments</li>
+                    <li>Sending class reminders, updates & announcements</li>
+                </ul>
+                <h3>3.2 Communication</h3>
+                <ul>
+                    <li>Email & WhatsApp support</li>
+                    <li>Important academic notifications</li>
+                    <li>Feedback surveys</li>
+                </ul>
+                <h3>3.3 Platform Management & Improvement</h3>
+                <ul>
+                    <li>Enhancing content performance</li>
+                    <li>Personalizing the learning experience</li>
+                    <li>Monitoring student progress</li>
+                </ul>
+                <h3>3.4 Legal & Compliance Requirements</h3>
+                <ul>
+                    <li>Verification of payments</li>
+                    <li>Prevention of fraud & misuse</li>
+                    <li>Responding to legal or regulatory obligations</li>
+                </ul>
+                <h3>3.5 Safety & Security</h3>
+                <ul>
+                    <li>Protecting User accounts</li>
+                    <li>Ensuring platform stability</li>
+                    <li>Preventing unauthorized access</li>
+                </ul>
+                <div class="highlight-box">Vidyantrix does not sell or trade User data for marketing or commercial exploitation.</div>
+
+                <h2>SECTION 4 — HOW DO WE STORE YOUR DATA?</h2>
+                <p>Vidyantrix employs technical and administrative safeguards to protect all stored information.</p>
+                <h3>4.1 Digital Storage</h3>
+                <p>All data is stored using secure cloud-based systems with restricted access.</p>
+                <h3>4.2 Protection Measures</h3>
+                <ul>
+                    <li>Encrypted transmission (SSL)</li>
+                    <li>Access only by authorized personnel</li>
+                    <li>Regular internal audits</li>
+                    <li>Monitoring of suspicious activity</li>
+                </ul>
+                <h3>4.3 Data Retention</h3>
+                <p>Data is retained:</p>
+                <ul>
+                    <li>As long as the User holds an active account</li>
+                    <li>Or as required for compliance with Indian law</li>
+                    <li>Or for resolving payment/technical disputes</li>
+                </ul>
+                <p>After the retention period, data may be securely deleted or anonymized.</p>
+                <h3>4.4 Risk Limitation</h3>
+                <p>No online platform can guarantee 100% security. Users share information at their own discretion and responsibility.</p>
+
+                <h2>SECTION 5 — MARKETING</h2>
+                <p>Vidyantrix does not sell User data for marketing and does not share personal information with unrelated third parties. Users may receive Class reminders, Course continuation notifications, and Official announcements. Users may opt out by emailing <strong>privacy@vidyantrix.com</strong>.</p>
+
+                <h2>SECTION 6 — YOUR DATA PROTECTION RIGHTS</h2>
+                <p>Every User is entitled to the following rights:</p>
+                <ul>
+                    <li><strong>6.1 Right to Access:</strong> You may request a copy of the data Vidyantrix holds about you.</li>
+                    <li><strong>6.2 Right to Rectification:</strong> You may request correction of inaccurate or incomplete information.</li>
+                    <li><strong>6.3 Right to Erasure:</strong> You may request deletion of your data under reasonable conditions.</li>
+                    <li><strong>6.4 Right to Restrict Processing:</strong> You may request limited use of your data under specific circumstances.</li>
+                    <li><strong>6.5 Right to Object to Processing:</strong> You may object to certain data usage based on legitimate grounds.</li>
+                    <li><strong>6.6 Right to Data Portability:</strong> You may request transfer of your data to another organization.</li>
+                </ul>
+                <p>To exercise these rights, Users may contact: <strong>support@vidyantrix.com</strong>. Vidyantrix will respond within 30 days.</p>
+
+                <h2>SECTION 7 — INTERNATIONAL TRANSFERS</h2>
+                <p>Vidyantrix uses globally distributed servers and third-party service providers. Therefore, User data may be processed outside India but always under strict confidentiality and protection standards.</p>
+
+                <h2>SECTION 8 — PRIVACY POLICY CHANGES</h2>
+                <p>Vidyantrix may revise or update this Privacy Policy at any time. Continued use of the platform constitutes acceptance of the revised terms.</p>
+
+                <h2>SECTION 9 — HOW TO CONTACT US</h2>
+                <p>For queries regarding data usage or privacy rights:</p>
+                <div class="contact-box">
+                    <p><strong>Email:</strong> support@vidyantrix.com</p>
+                    <p>Vidyantrix operates exclusively online; no physical office is maintained.</p>
+                </div>
             `,
             'terms': `
-                <h1>Terms and Conditions</h1>
-                <p>These Terms and Conditions (“Terms”) govern your access to and use of the Vidyantrix Platform. By using our services, you agree to comply with these Terms.</p>
+                <h1>TERMS & CONDITIONS — VIDYANTRIX</h1>
+                <p>The following Terms govern all User interactions with the Vidyantrix Online Learning Platform.</p>
 
-                <h2>1. Services</h2>
+                <h2>SECTION 1 — SERVICE STRUCTURE</h2>
                 <p>Vidyantrix provides:</p>
                 <ul>
-                    <li>Online live classes</li>
-                    <li>Recorded educational videos</li>
-                    <li>Digital study materials</li>
-                    <li>Test series and assessments</li>
-                    <li>Student support and academic guidance</li>
+                    <li>Live online classes</li>
+                    <li>Recorded course modules</li>
+                    <li>Digital notes & study materials</li>
+                    <li>Assessments & practice tests</li>
+                    <li>Mentorship and academic support</li>
                 </ul>
-                <p class="text-slate-500 italic">All services are subject to change, modification, or enhancement without prior notice.</p>
+                <p style="font-style: italic;">All services are digital-only.</p>
 
-                <h2>2. User Responsibilities</h2>
+                <h2>SECTION 2 — USER OBLIGATIONS</h2>
                 <p>Users agree to:</p>
                 <ul>
-                    <li>Provide accurate information during registration</li>
+                    <li>Provide accurate registration details</li>
                     <li>Maintain confidentiality of login credentials</li>
-                    <li>Use the Platform only for personal learning purposes</li>
-                    <li>Comply with all applicable laws while using the services</li>
+                    <li>Not share course content with external parties</li>
+                    <li>Attend classes responsibly and follow academic guidelines</li>
                 </ul>
-                <p><strong class="text-red-600">You must not:</strong></p>
-                <ul class="text-red-700 bg-red-50 p-4 rounded border border-red-100">
-                    <li>Record, copy, download, distribute, or share any content without permission</li>
-                    <li>Allow others to access your account</li>
-                    <li>Try to bypass security controls or technical restrictions</li>
-                    <li>Misuse the Platform for illegal or inappropriate activities</li>
-                </ul>
-
-                <h2>3. Intellectual Property</h2>
-                <p>All materials on the Platform—including videos, documents, graphics, digital content, and technology—are the exclusive property of Vidyantrix.</p>
-                <p class="font-bold text-brand-700">No user is permitted to reproduce, modify, host, publish, transmit, or resell any content without written authorization.</p>
-
-                <h2>4. Payment Terms</h2>
-                <p>All payments:</p>
+                <p><strong>Users must not:</strong></p>
                 <ul>
-                    <li>Must be made through the approved modes</li>
-                    <li>Are non-transferable</li>
-                    <li>Are subject to the Refund and Cancellation Policy</li>
+                    <li>Copy, download, record, redistribute, or monetize Vidyantrix content</li>
+                    <li>Use bots, scripts, or automated tools</li>
+                    <li>Impersonate other Users or misuse the platform</li>
                 </ul>
 
-                <h2>5. Limitation of Liability</h2>
-                <p>Vidyantrix shall not be responsible for:</p>
+                <h2>SECTION 3 — INTELLECTUAL PROPERTY</h2>
+                <p>All course content, videos, PDFs, images, notes, assessments, and digital materials are exclusive property of Vidyantrix.</p>
+                <div class="highlight-box">Users are strictly prohibited from Reproducing, Distributing, Mirroring, Recording, or Selling content. Such actions will result in permanent account termination and potential legal action.</div>
+
+                <h2>SECTION 4 — PAYMENT TERMS</h2>
+                <p>Users agree that:</p>
                 <ul>
-                    <li>Internet issues on the user’s end</li>
-                    <li>Device errors, software problems, or compatibility issues</li>
-                    <li>Disruptions caused by third-party service providers</li>
-                    <li>User misunderstanding of course content</li>
+                    <li>Fees once paid are non-transferable</li>
+                    <li>Payments must be made through authorized channels</li>
+                    <li>Vidyantrix is not responsible for bank/payment delays</li>
+                    <li>Refunds follow the official Refund Policy listed below.</li>
                 </ul>
 
-                <h2>6. Termination</h2>
-                <p>We reserve the right to suspend, restrict, or terminate any user account in cases of:</p>
+                <h2>SECTION 5 — LIMITATION OF LIABILITY</h2>
+                <p>Vidyantrix is not responsible for:</p>
                 <ul>
-                    <li>Policy violation</li>
-                    <li>Misuse of the Platform</li>
-                    <li>Fraudulent activity</li>
-                    <li>Non-compliance with these Terms</li>
+                    <li>Internet issues</li>
+                    <li>Device malfunctions</li>
+                    <li>Power outages</li>
+                    <li>Misuse of content</li>
+                    <li>Wrong purchases made by the User</li>
                 </ul>
 
-                <h2>7. Amendments</h2>
-                <p>Vidyantrix may update or modify these Terms at any time. Continued use of the Platform implies acceptance of revised Terms.</p>
+                <h2>SECTION 6 — TERMINATION OF ACCOUNT</h2>
+                <p>Vidyantrix may suspend or terminate User accounts for:</p>
+                <ul>
+                    <li>Policy violations</li>
+                    <li>Unauthorized content sharing</li>
+                    <li>Fraudulent payments</li>
+                    <li>Misconduct in live sessions</li>
+                </ul>
+
+                <h2>SECTION 7 — CHANGES TO TERMS</h2>
+                <p>Vidyantrix reserves the right to modify these Terms at any time. Continued usage implies acceptance.</p>
             `,
             'refund': `
-                <h1>Refund and Cancellation Policy</h1>
-                <p>This Policy outlines the conditions under which refunds or cancellations may be considered.</p>
+                <h1>REFUND, CANCELLATION, TRANSFER & RE-REGISTRATION POLICY</h1>
+                <p>This policy governs all refund-related operations for Vidyantrix online services.</p>
 
-                <h2>1. Refund Eligibility</h2>
-                <p>A refund may be initiated only in the following circumstances:</p>
+                <h2>SECTION 1 — CANCELLATION POLICY</h2>
                 <ul>
-                    <li>If payment is successfully deducted but the course is not activated.</li>
-                    <li>If the same course is accidentally purchased more than once.</li>
-                    <li>If a technical failure from our side prevents course access.</li>
+                    <li><strong>1.1</strong> Cancellation can be requested only by the registered User.</li>
+                    <li><strong>1.2</strong> Cancellation requests must be emailed to <strong class="text-brand-700">refunds@vidyantrix.com</strong>.</li>
+                    <li><strong>1.3</strong> Required documents must be submitted (payment receipt, ID proof, etc.).</li>
                 </ul>
-                <p class="bg-yellow-50 p-2 rounded border-l-4 border-yellow-400 text-sm">All refund requests must be supported with valid proof (transaction ID, screenshots, etc.).</p>
 
-                <h2>2. Non-Refundable Situations</h2>
-                <p>Refunds will not be provided for:</p>
+                <h2>SECTION 2 — REFUND POLICY</h2>
+                <p>Refunds are permitted only under the following conditions:</p>
+
+                <h3>2.1 Eligible Refund Cases</h3>
                 <ul>
-                    <li>Digital courses once accessed or viewed</li>
-                    <li>Live classes that have already been attended</li>
-                    <li>Study materials already downloaded or opened</li>
-                    <li>Change of mind or mistaken purchases</li>
-                    <li>Device or internet issues on the user’s side</li>
+                    <li>Duplicate payment</li>
+                    <li>Payment deducted but course not activated</li>
+                    <li>Technical issue from Vidyantrix’s end</li>
                 </ul>
-                <p>Subscriptions and long-term plans become non-refundable once activated.</p>
 
-                <h2>3. Cancellation Policy</h2>
-                <p>Registrations for live class packages may be cancelled only before the first scheduled session begins.</p>
-                <p>After classes commence, cancellation is not permitted.</p>
-
-                <h2>4. Refund Processing</h2>
-                <p>If a refund is approved:</p>
+                <h3>2.2 Non-Refundable Situations</h3>
                 <ul>
-                    <li>It will be processed within <strong>5–10 working days</strong></li>
-                    <li>Refund will be issued through the original payment method only</li>
+                    <li>Recorded courses accessed</li>
+                    <li>Live classes attended</li>
+                    <li>PDF/downloadable materials used</li>
+                    <li>User-side technical/internet issues</li>
+                    <li>Course purchased by mistake</li>
                 </ul>
-                <p class="text-sm text-slate-500 italic">Processing time may vary depending on banking or payment gateway procedures.</p>
 
-                <h2>5. How to Request a Refund</h2>
-                <p>Contact: <a href="mailto:refunds@vidyantrix.com" class="text-brand-600 underline font-bold">refunds@vidyantrix.com</a></p>
-                <p>Include:</p>
+                <h3>2.3 Refund Processing</h3>
                 <ul>
-                    <li>Registered email address</li>
-                    <li>Payment details</li>
-                    <li>Reason for request</li>
-                    <li>Supporting documents</li>
+                    <li>80% refund for valid eligible cases</li>
+                    <li>NO refund after content access</li>
+                    <li>Refunds processed within <strong>7–10 business days</strong></li>
                 </ul>
-                <p>All requests are subject to internal review and verification.</p>
+                <div class="highlight-box">Refunds will be returned only to the original payment method.</div>
+
+                <h2>SECTION 3 — RE-REGISTRATION POLICY</h2>
+                <p>Users may re-register for the same course only if:</p>
+                <ul>
+                    <li>Course has not been accessed</li>
+                    <li>Request is made within 30 days</li>
+                    <li>A re-registration fee of 15% of the course price is paid</li>
+                </ul>
+                <p><strong>Only one re-registration is allowed per User.</strong></p>
+
+                <h2>SECTION 4 — TRANSFER POLICY</h2>
+                <p>Vidyantrix does not permit:</p>
+                <ul>
+                    <li>Transfer of access to another User</li>
+                    <li>Transfer of enrollment between courses</li>
+                    <li>Transfer of course credits</li>
+                </ul>
+
+                <h2>SECTION 5 — NO-SHOW POLICY</h2>
+                <p>Failure to attend live classes or use the course does not qualify for a refund.</p>
+
+                <h2>SECTION 6 — GENERAL LEGAL DISCLAIMERS</h2>
+                <p>Vidyantrix is not responsible for:</p>
+                <ul>
+                    <li>Loss of data due to User negligence</li>
+                    <li>Any academic outcomes or exam results</li>
+                    <li>Third-party failures</li>
+                    <li>External disruptions</li>
+                </ul>
             `
         };
 
